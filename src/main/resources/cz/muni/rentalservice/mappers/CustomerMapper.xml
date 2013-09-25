@@ -1,0 +1,56 @@
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cz.muni.rentalservice.mappers.CustomerMapper">
+    <resultMap id="result" type="Customer">
+        <id property="id"           column="customer_id"/>
+        <result property="name"     column="customer_name"/>
+        <result property="surname"  column="customer_surname"/>
+        <result property="born"     column="customer_born"/>
+    </resultMap>
+    
+    <sql id="columns">
+        c.id_customer AS customer_id,
+        c.name AS customer_name,
+        c.surname AS customer_surname,
+        c.born AS customer_born
+    </sql>
+    
+    <insert id="insert" keyProperty="customer.id" useGeneratedKeys="true">
+        INSERT INTO customer (name, surname, born) 
+        VALUES (#{customer.name},#{customer.surname},#{customer.born})
+    </insert>
+    
+    <delete id="delete">
+        DELETE FROM customer WHERE id_customer = #{customer.id}
+    </delete>
+    
+    <update id="update">
+        UPDATE 
+            customer
+        SET
+            name = #{customer.name},
+            surname = #{customer.surname},
+            born = #{customer.born}
+        WHERE
+            id_customer = #{customer.id}
+    </update>
+    
+    <select id="selectCustomer" resultMap="result">
+        SELECT 
+            <include refid="columns"/>
+        FROM
+            customer AS c
+        WHERE
+            c.id_customer = #{id}
+    </select>
+    
+    <select id="selectCustomers" resultMap="result">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            customer AS c
+    </select>
+    
+    
+</mapper>

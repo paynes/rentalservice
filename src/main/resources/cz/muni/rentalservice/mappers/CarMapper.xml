@@ -1,0 +1,54 @@
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cz.muni.rentalservice.mappers.CarMapper">
+    <resultMap id="result" type="Car">
+        <id property="id" column="car_id"/>
+        <result property="regNumber" column="car_regNumber"/>
+        <result property="model" column="car_model"/>
+        <result property="dailyFee" column="car_dailyFee"/>
+    </resultMap>
+    
+    <sql id="columns">
+        c.id_car AS car_id,
+        c.reg_number AS car_regNumber,
+        c.model AS car_model,
+        c.daily_fee AS car_dailyFee
+    </sql>
+    
+    <insert id="insert" keyProperty="car.id" useGeneratedKeys="true">
+        INSERT INTO car (reg_number,model,daily_fee)
+        VALUES (#{car.regNumber}, #{car.model}, #{car.dailyFee})
+    </insert>
+    
+    <update id="update">
+        UPDATE
+            car
+        SET
+            reg_number = #{car.regNumber},
+            model = #{car.model},
+            daily_fee = #{car.dailyFee}
+        WHERE
+            id_car = #{car.id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM car WHERE id_car = #{car.id}
+    </delete>
+    
+    <select id="selectCar" resultMap="result">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            car AS c
+        WHERE
+            c.id_car = #{id}
+    </select>
+    
+    <select id="selectCars" resultMap="result">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            car AS c
+    </select>
+</mapper>

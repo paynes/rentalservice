@@ -1,0 +1,63 @@
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+        
+<mapper namespace="cz.muni.rentalservice.mappers.RentalMapper">
+    <resultMap id="result" type="Rental">
+        <id             property="id"   column="rental_id"/>
+        <result         property="dateFrom"     column="rental_dateFrom"/>
+        <result         property="dateTo"       column="rental_dateTo"/>
+        <result         property="expectedDays" column="rental_expectedDays"/>
+        <result         property="paid"         column="rental_paid"/>
+        <association    property="car" column="rental_car" select="${mappers}.CarMapper.selectCar" />
+        <association    property="customer" column="rental_customer" select="${mappers}.CustomerMapper.selectCustomer"/>
+    </resultMap>
+    
+    <sql id="columns">
+        r.id_rental        AS rental_id,
+        r.car_id           AS rental_car,
+        r.customer_id      AS rental_customer,
+        r.date_from        AS rental_dateFrom,
+        r.date_to          AS rental_dateTo,
+        r.expected_days    AS rental_expectedDays,
+        r.payement         AS rental_paid
+    </sql>
+    
+    <insert id="insert" keyProperty="rental.id" useGeneratedKeys="true">
+        INSERT INTO rental (date_from, date_to, expected_days, payement, car_id, customer_id)
+        VALUES (#{rental.dateFrom}, #{rental.dateTo}, #{rental.expectedDays}, #{rental.paid}, #{rental.car.id}, #{rental.customer.id})
+    </insert>
+    
+    <update id="update">
+        UPDATE
+            rental
+        SET
+            date_from = #{rental.dateFrom},
+            date_to = #{rental.dateTo},
+            expected_days = #{rental.expectedDays},
+            payement = #{rental.paid},
+            car_id = #{rental.car.id},
+            customer_id = #{rental.customer.id}
+        WHERE
+            id_rental = #{rental.id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM rental WHERE id_rental = #{rental.id}
+    </delete>
+    
+    <select id="selectRental" resultMap="result">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            rental AS r
+        WHERE
+            r.id_rental = #{id}
+    </select>
+    
+    <select id="selectRentals" resultMap="result">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            rental AS r
+    </select>
+</mapper>

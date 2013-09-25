@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- Our awesome logging setup for tests -->
+  
+  <!-- Appender for logging to console -->  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">    
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-19([%thread]) %-5level %-55(%logger{50}[%line]) - %msg%n%throwable</pattern>      
+    </encoder>
+  </appender>    
+
+  <!-- Default Setup for every logger, if not overriden -->
+  <root level="debug">    
+    <appender-ref ref="STDOUT" />
+  </root>
+  
+  <logger name="cz.muni.rentalservice" level="DEBUG" />
+  <logger name="java.sql" level="INFO" />
+  <logger name="org.springframework" level="INFO" />
+  <logger name="org.mybatis" level="INFO" />
+  <logger name="org.apache.ibatis" level="INFO" />
+</configuration>
