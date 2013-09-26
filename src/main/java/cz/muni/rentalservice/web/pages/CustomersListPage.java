@@ -16,7 +16,14 @@
 package cz.muni.rentalservice.web.pages;
 
 import cz.muni.rentalservice.db.managers.CarManager;
+import cz.muni.rentalservice.db.managers.CustomerManager;
+import cz.muni.rentalservice.models.Car;
+import cz.muni.rentalservice.models.Customer;
+import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 /**
@@ -26,9 +33,35 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 public class CustomersListPage extends BasePage {
     
     @SpringBean
-    private CarManager manager;
+    private CustomerManager manager;
     
     public CustomersListPage() {
-        add(new Label("message", manager.getCar(Long.valueOf(1)).getId()));
-    }    
+        add(new Label("message", "Customers"));
+        addCustomersModule();
+    }
+    
+    private void addCustomersModule() {
+        ListView<Customer> customers = new ListView<Customer>("customers",createModelForCustomers()) {
+
+            @Override
+            protected void populateItem(ListItem item) {
+                Customer customer = (Customer) item.getModelObject();
+                item.add(new Label("id",customer.getId()));
+                item.add(new Label("name", customer.getName()));
+            }          
+        };
+        customers.setVisible(!customers.getList().isEmpty());
+        
+        add(customers);
+    }
+
+    private LoadableDetachableModel<List<Customer>> createModelForCustomers() {
+        return new LoadableDetachableModel<List<Customer>>() {
+
+            @Override
+            protected List<Customer> load() {
+                return manager.getCustomers();
+            }            
+        };
+    }
 }

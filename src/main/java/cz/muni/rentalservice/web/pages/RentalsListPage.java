@@ -15,8 +15,13 @@
  */
 package cz.muni.rentalservice.web.pages;
 
-import cz.muni.rentalservice.db.managers.CarManager;
+import cz.muni.rentalservice.db.managers.RentalManager;
+import cz.muni.rentalservice.models.Rental;
+import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 /**
@@ -26,9 +31,37 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 public class RentalsListPage extends BasePage {
  
     @SpringBean
-    private CarManager manager;
+    private RentalManager manager;
     
     public RentalsListPage() {
-        add(new Label("message",manager.getCar(Long.valueOf(1)).getRegNumber()));
+        add(new Label("message", "Rentals"));
+        addRentalsModule();
+    }
+
+    private void addRentalsModule() {
+        ListView rentals = new ListView<Rental>("rentals", createModelForRental()) {
+
+            @Override
+            protected void populateItem(ListItem item) {
+                Rental rental = (Rental) item.getModelObject();
+                item.add(new Label("id",rental.getId()));
+                item.add(new Label("name",rental.getCustomer().getName()));
+            }          
+        };
+        
+        rentals.setVisible(!rentals.getList().isEmpty());
+        
+        add(rentals);
+    }
+
+    private LoadableDetachableModel<List<Rental>> createModelForRental() {
+        return new LoadableDetachableModel<List<Rental>>() {
+
+            @Override
+            protected List<Rental> load() {
+                return manager.getRentals();
+            }
+            
+        };
     }
 }

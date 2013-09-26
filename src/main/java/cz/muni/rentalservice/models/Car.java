@@ -15,10 +15,12 @@
  */
 package cz.muni.rentalservice.models;
 
+
 /**
  *
  * @author paynes
  */
+
 public class Car {
     private Long id;
     private String regNumber;

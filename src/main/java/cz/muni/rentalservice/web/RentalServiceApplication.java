@@ -14,29 +14,26 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RentalServiceApplication extends WebApplication {    	
-	/**
-	 * @see org.apache.wicket.Application#getHomePage()
-	 */
-    
-        
-	@Override
-	public Class getHomePage()
-	{
-		return CarsListPage.class;
-	}
+    /**
+     * @see org.apache.wicket.Application#getHomePage()
+     */
+            
+    @Override
+    public Class getHomePage() {
+	return CarsListPage.class;
+    }
 
-	/**
-	 * @see org.apache.wicket.Application#init()
-	 */
-	@Override
-	public void init()
-	{
-		super.init();
+    /**
+     * @see org.apache.wicket.Application#init()
+     */
+    @Override
+    public void init() {
+	super.init();
 
-		this.getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+	this.getComponentInstantiationListeners().add(new SpringComponentInjector(this));
                 
-                this.mountPage("cars", CarsListPage.class);
-                this.mountPage("customers", CustomersListPage.class);
-                this.mountPage("rentals",RentalsListPage.class);
-	}
+        this.mountPage("cars", CarsListPage.class);
+        this.mountPage("customers", CustomersListPage.class);
+        this.mountPage("rentals",RentalsListPage.class);
+    }
 }

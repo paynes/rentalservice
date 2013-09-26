@@ -16,10 +16,13 @@
 package cz.muni.rentalservice.web.pages;
 
 import cz.muni.rentalservice.db.managers.CarManager;
-import java.io.Serializable;
-import org.apache.wicket.MarkupContainer;
+import cz.muni.rentalservice.models.Car;
+import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.model.IModel;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 
@@ -33,7 +36,33 @@ public class CarsListPage extends BasePage{
     private CarManager manager;
     
     public CarsListPage() {
-        add(new Label("message", manager.getCar(Long.valueOf(1)).getModel()));
+        add(new Label("message", "Cars"));
+        addCarsModule();
+        
+    }
+    
+    private void addCarsModule() {
+        ListView<Car> cars = new ListView<Car>("cars",createModelForCars()) {
+            @Override
+            protected void populateItem(ListItem item) {
+                Car car = (Car) item.getModelObject();
+                item.add(new Label("id", car.getId()));  
+                item.add(new Label("model", car.getModel()));
+            }
+        };
+        cars.setVisible(!cars.getList().isEmpty());
+        
+        add(cars);
+    }
+    
+    private LoadableDetachableModel<List<Car>> createModelForCars() {
+        return new LoadableDetachableModel<List<Car>>() {
+
+                        @Override
+                        protected List<Car> load() {
+                                return manager.getCars();
+                        }
+                };
     }
 }
 

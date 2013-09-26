@@ -3,11 +3,39 @@
 	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
     <body>
         <wicket:extend>
-            <div class="container">
-                <h1><span wicket:id="message">Bootstrap starter template</span></h1>
-                <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
-
-            </div> <!-- /container -->
-    </wicket:extend>
+            <div class="span4">
+                <div class="container">
+                    <h1><span wicket:id="message">Bootstrap starter template</span></h1>
+                    <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+                </div>
+                    
+                <!-- /container -->
+                <wicket:enclosure child="cars">
+                    <table>
+                        <span wicket:id="cars">
+                            <div class="accordion" id="accordion2">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse">
+                                            <span wicket:id="id"></span>
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <span wicket:id="model"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </table>
+                </wicket:enclosure>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function() {  
+                    $(".collapse").collapse();
+                });
+            </script>
+        </wicket:extend>
     </body>
 </html>
