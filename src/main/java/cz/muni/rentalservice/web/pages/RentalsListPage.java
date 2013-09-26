@@ -52,6 +52,10 @@ public class RentalsListPage extends BasePage {
         rentals.setVisible(!rentals.getList().isEmpty());
         
         add(rentals);
+        
+        Label noRentals = new Label("noRentals", "V databaze nie su ziadne zaznamy.");
+        noRentals.setVisible(!rentals.isVisible());
+        add(noRentals);
     }
 
     private LoadableDetachableModel<List<Rental>> createModelForRental() {

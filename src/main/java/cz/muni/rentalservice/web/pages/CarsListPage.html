@@ -5,8 +5,7 @@
         <wicket:extend>
             <div class="span4">
                 <div class="container">
-                    <h1><span wicket:id="message">Bootstrap starter template</span></h1>
-                    <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+                    <h1><span wicket:id="message">Rentals</span></h1>
                 </div>
                     
                 <!-- /container -->
@@ -30,12 +29,14 @@
                         </span>
                     </table>
                 </wicket:enclosure>
+                <button type="button" class="btn btn-primary" data-toggle="button">
+                    <!--<a wicket:id="CarsListPage">Button</a>-->
+                </button>
+                <div style="float: right;">
+                    <a href="#" wicket:id="EditCarPage">Add Car</a>
+                </div>
+                <div wicket:id="noCars"/>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function() {  
-                    $(".collapse").collapse();
-                });
-            </script>
         </wicket:extend>
     </body>
 </html>

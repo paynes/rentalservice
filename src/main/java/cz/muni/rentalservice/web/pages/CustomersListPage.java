@@ -15,12 +15,11 @@
  */
 package cz.muni.rentalservice.web.pages;
 
-import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.db.managers.CustomerManager;
-import cz.muni.rentalservice.models.Car;
 import cz.muni.rentalservice.models.Customer;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -36,8 +35,21 @@ public class CustomersListPage extends BasePage {
     private CustomerManager manager;
     
     public CustomersListPage() {
+        initComponents();
+    }
+    
+    private void initComponents() {
         add(new Label("message", "Customers"));
         addCustomersModule();
+        
+        add(new Link<BasePage>("EditCustomerPage") {
+
+            @Override
+            public void onClick() {
+                setResponsePage(new EditCustomerPage());
+            }
+        }); 
+        
     }
     
     private void addCustomersModule() {
@@ -53,6 +65,10 @@ public class CustomersListPage extends BasePage {
         customers.setVisible(!customers.getList().isEmpty());
         
         add(customers);
+        
+        Label noCustomers = new Label("noCustomers","V databaze nie su ziadny uzivatelia");
+        noCustomers.setVisible(!customers.isVisible());
+        add(noCustomers);
     }
 
     private LoadableDetachableModel<List<Customer>> createModelForCustomers() {

@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+
+<body>
+    <wicket:extend>
+        <h3>
+            Add Car
+        </h3>
+        <br/>
+            <form action="" wicket:id="editCar">
+                <label for="model" wicket:id="modelLabel">Car model</label> 
+                    <input type="text" id="name" wicket:id="model"/>
+                <br/>
+                <label for="regNumber" wicket:id="regNumberLabel">Car registration number</label>
+                    <input type="text" id="name" wicket:id="regNumber"/>
+                 <br/>
+                 <label for="dailyFee" wicket:id="dailyFeeLabel">Daily fee</label>
+                    <input type="text" id="name" wicket:id="dailyFee"/>
+                 <br/>
+                <input type="submit" value="Save" class="formbutton" name="save" wicket:id="submitButton"/>
+            </form>
+    </wicket:extend>
+</body>
+</html>

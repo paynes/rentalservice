@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RentalServiceApplication extends WebApplication {    	
-    /**
-     * @see org.apache.wicket.Application#getHomePage()
-     */
+    
             
     @Override
     public Class getHomePage() {

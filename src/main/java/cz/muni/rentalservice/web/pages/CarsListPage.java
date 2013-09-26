@@ -19,6 +19,7 @@ import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -36,23 +37,36 @@ public class CarsListPage extends BasePage{
     private CarManager manager;
     
     public CarsListPage() {
-        add(new Label("message", "Cars"));
         addCarsModule();
-        
+        initComponents();
+    }
+    
+    public void initComponents() {
+        add(new Label("message", "Cars"));
+        add(new Link<BasePage>("EditCarPage") {
+
+            @Override
+            public void onClick() {
+                setResponsePage(new EditCarPage());
+            }
+        });
     }
     
     private void addCarsModule() {
         ListView<Car> cars = new ListView<Car>("cars",createModelForCars()) {
             @Override
-            protected void populateItem(ListItem item) {
-                Car car = (Car) item.getModelObject();
-                item.add(new Label("id", car.getId()));  
-                item.add(new Label("model", car.getModel()));
+            protected void populateItem(ListItem item) {  
+                item.add(new Label("id",new PropertyModel<Car>(item.getModel(),"id")));
+                item.add(new Label("model", new PropertyModel<Car>(item.getModel(),"model")));
             }
         };
         cars.setVisible(!cars.getList().isEmpty());
         
         add(cars);
+        
+        Label noCars = new Label("noCars","V databaze nie su ziadne auta.");
+        noCars.setVisible(!cars.isVisible());
+        add(noCars);
     }
     
     private LoadableDetachableModel<List<Car>> createModelForCars() {
