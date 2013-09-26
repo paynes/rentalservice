@@ -3,11 +3,12 @@
 
 <body>
     <wicket:extend>
-        <h3>
-            Add Car
-        </h3>
-        <br/>
-            <form action="" wicket:id="editCar">
+        <div class="span10">
+            <div class="container">
+                <h1><span wicket:id="title">Title</span></h1>
+            </div>
+            <div class="container">
+                <form action="" wicket:id="editCar">
                 <label for="model" wicket:id="modelLabel">Car model</label> 
                     <input type="text" id="name" wicket:id="model"/>
                 <br/>
@@ -17,8 +18,14 @@
                  <label for="dailyFee" wicket:id="dailyFeeLabel">Daily fee</label>
                     <input type="text" id="name" wicket:id="dailyFee"/>
                  <br/>
-                <input type="submit" value="Save" class="formbutton" name="save" wicket:id="submitButton"/>
+                <!--<input type="submit" value="Save" class="formbutton" name="save" wicket:id="submitButton"/>-->
+                <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="submitButton">
+                    Save Car
+                </button>
             </form>
+            </div>
+        </div>
+        
     </wicket:extend>
 </body>
 </html>

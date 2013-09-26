@@ -15,13 +15,15 @@
  */
 package cz.muni.rentalservice.models;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author paynes
  */
 
-public class Car {
+public class Car implements Serializable{
     private Long id;
     private String regNumber;
     private String model;

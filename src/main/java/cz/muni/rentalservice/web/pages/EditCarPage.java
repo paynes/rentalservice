@@ -19,7 +19,9 @@ import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -39,6 +41,7 @@ public class EditCarPage extends BasePage {
     
     public EditCarPage() {
         addForm();
+        add(new Label("title","Edit car"));
     }
     
 
@@ -51,19 +54,19 @@ public class EditCarPage extends BasePage {
         Label modelLabel  = new Label("modelLabel","Model");
         editForm.add(modelLabel);
         
-        TextField<String> modelField = new TextField<String>("model");
+        RequiredTextField<String> modelField = new RequiredTextField<String>("model");
         editForm.add(modelField);
         
         Label regNumberLabel = new Label("regNumberLabel", "Registration Number");
         editForm.add(regNumberLabel);
         
-        TextField<String> regNumberField = new TextField<String>("regNumber");
+        RequiredTextField<String> regNumberField = new RequiredTextField<String>("regNumber");
         editForm.add(regNumberField);
         
         Label dailyFeeLabel = new Label("dailyFeeLabel","Daily fee");
         editForm.add(dailyFeeLabel);
         
-        TextField<String> dailyFeeField = new TextField<String>("dailyFee");
+        RequiredTextField<String> dailyFeeField = new RequiredTextField<String>("dailyFee");
         editForm.add(dailyFeeField);
         
         Button submitButton = new Button("submitButton") {

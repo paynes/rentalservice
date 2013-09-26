@@ -15,13 +15,14 @@
  */
 package cz.muni.rentalservice.models;
 
+import java.io.Serializable;
 import org.joda.time.LocalDateTime;
 
 /**
  *
  * @author paynes
  */
-public class Rental {
+public class Rental implements Serializable{
     
     private Long id;
     private Car car;

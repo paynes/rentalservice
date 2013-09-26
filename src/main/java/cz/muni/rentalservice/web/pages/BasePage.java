@@ -16,6 +16,7 @@ public class BasePage extends WebPage {
     }
     
     public final void init() {
+        
         this.add(new BookmarkablePageLink<Void>("CarsListPage",CarsListPage.class));
         this.add(new BookmarkablePageLink<Void>("CustomersListPage",CustomersListPage.class));
         this.add(new BookmarkablePageLink<Void>("RentalsListPage",RentalsListPage.class));

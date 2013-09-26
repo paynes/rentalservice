@@ -20,7 +20,7 @@ import cz.muni.rentalservice.models.Customer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
@@ -46,21 +46,21 @@ public class EditCustomerPage extends BasePage {
     }
 
     private void addForm() {
-        Form<EditCustomerPage> editCustomer = new Form<EditCustomerPage>("editCustomer", 
-                new CompoundPropertyModel<EditCustomerPage>(this));
+        Form<EditCustomerPage> editCustomer = new Form<>("editCustomer", 
+                new CompoundPropertyModel<>(this));
         
         add(editCustomer);
         
         Label nameLabel = new Label("nameLabel","Customers name");
         editCustomer.add(nameLabel);
         
-        TextField<String> nameField = new TextField<String>("name");
+        RequiredTextField<String> nameField = new RequiredTextField<>("name");
         editCustomer.add(nameField);
         
         Label surnameLabel = new Label("surnameLabel","Customers surname");
         editCustomer.add(surnameLabel);
         
-        TextField<String> surnameField = new TextField("surname");
+        RequiredTextField<String> surnameField = new RequiredTextField("surname");
         editCustomer.add(surnameField);
         
         Button submitButton = new Button("submitButton") {
