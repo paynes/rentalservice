@@ -1,21 +1,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
 	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
 
-<body>
-    <wicket:extend>
-        <h3>
-            Add Car
-        </h3>
-        <br/>
-            <form action="" wicket:id="editCustomer">
-                <label for="name" wicket:id="nameLabel">Car model</label> 
-                    <input type="text" id="name" wicket:id="name"/>
-                <br/>
-                <label for="surname" wicket:id="surnameLabel">Car registration number</label>
-                    <input type="text" id="name" wicket:id="surname"/>
-                 <br/>
-                <input type="submit" value="Save" class="formbutton" name="save" wicket:id="submitButton"/>
-            </form>
-    </wicket:extend>
-</body>
+    <body>
+        <wicket:extend>
+            <div class="span10">
+                <div class="container">
+                    <h1><span wicket:id="title">Title</span></h1>
+                </div>
+                <div class="container">
+                    <form action="" wicket:id="editCustomer">
+                        <label for="name" wicket:id="nameLabel">Car model</label> 
+                        <input type="text" id="name" wicket:id="name"/>
+                        <br/>
+                    
+                        <label for="surname" wicket:id="surnameLabel">Car registration number</label>
+                        <input type="text" id="name" wicket:id="surname"/>
+                        <br/>
+                        
+                        <label for="dropLabel" wicket:id="dropLabel">Choose date of birth</label>
+                        <div wicket:id="born"></div>
+                        <br/>
+                        
+                        <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="submitButton">
+                            Save Customer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </wicket:extend>
+    </body>
 </html>

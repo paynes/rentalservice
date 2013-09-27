@@ -19,6 +19,7 @@ import cz.muni.rentalservice.db.managers.RentalManager;
 import cz.muni.rentalservice.models.Rental;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -36,6 +37,15 @@ public class RentalsListPage extends BasePage {
     public RentalsListPage() {
         add(new Label("message", "Rentals"));
         addRentalsModule();
+        
+        add(new Link<BasePage>("EditRentalPage") {
+
+            @Override
+            public void onClick() {
+                setResponsePage(new EditRentalPage());
+            }
+            
+        });
     }
 
     private void addRentalsModule() {

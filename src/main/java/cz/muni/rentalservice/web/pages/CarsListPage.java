@@ -41,7 +41,7 @@ public class CarsListPage extends BasePage{
         initComponents();
     }
     
-    public void initComponents() {
+    public final void initComponents() {
         add(new Label("message", "Cars"));
         add(new Link<BasePage>("EditCarPage") {
 

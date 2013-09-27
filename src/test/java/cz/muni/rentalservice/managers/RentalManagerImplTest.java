@@ -92,7 +92,7 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(1));
         customer.setName("Peter");
         customer.setSurname("Marcin");
-        customer.setBorn(new LocalDate(1991,9,23));
+        customer.setBorn(new LocalDateTime(1991,9,23,0,0));
         
         expected.setCar(car);
         expected.setCustomer(customer);
@@ -135,7 +135,7 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(2));
         customer.setName("Honza");
         customer.setSurname("Novak");
-        customer.setBorn(new LocalDate(1990,6,3));
+        customer.setBorn(new LocalDateTime(1990,6,3,0,0));
         
         expected.setCustomer(customer);
         
@@ -189,7 +189,7 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(1));
         customer.setName("Peter");
         customer.setSurname("Marcin");
-        customer.setBorn(new LocalDate(1991,9,23));
+        customer.setBorn(new LocalDateTime(1991,9,23,0,0));
         
         rental.setCar(car);
         rental.setCustomer(customer);

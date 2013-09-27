@@ -19,12 +19,11 @@ import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.validation.validator.StringValidator;
 
 /**
  *
@@ -37,7 +36,7 @@ public class EditCarPage extends BasePage {
     
     String model;
     String regNumber;
-    String dailyFee;
+    Double dailyFee;
     
     public EditCarPage() {
         addForm();
@@ -46,27 +45,32 @@ public class EditCarPage extends BasePage {
     
 
     private void addForm() {
-        Form<EditCarPage> editForm = new Form<EditCarPage>("editCar",
-                new CompoundPropertyModel<EditCarPage>(this));
+        Form<EditCarPage> editForm = new Form<>("editCar",
+                new CompoundPropertyModel<>(this));
         
         add(editForm);
+        
         
         Label modelLabel  = new Label("modelLabel","Model");
         editForm.add(modelLabel);
         
-        RequiredTextField<String> modelField = new RequiredTextField<String>("model");
+        TextField<String> modelField = new TextField<>("model");
+        modelField.setRequired(true);
+        modelField.add(StringValidator.maximumLength(50));
         editForm.add(modelField);
         
         Label regNumberLabel = new Label("regNumberLabel", "Registration Number");
         editForm.add(regNumberLabel);
         
-        RequiredTextField<String> regNumberField = new RequiredTextField<String>("regNumber");
+        TextField<String> regNumberField = new TextField<>("regNumber");
+        regNumberField.setRequired(true);
         editForm.add(regNumberField);
         
         Label dailyFeeLabel = new Label("dailyFeeLabel","Daily fee");
         editForm.add(dailyFeeLabel);
         
-        RequiredTextField<String> dailyFeeField = new RequiredTextField<String>("dailyFee");
+        TextField<Double> dailyFeeField = new TextField<>("dailyFee");
+        dailyFeeField.setRequired(true);
         editForm.add(dailyFeeField);
         
         Button submitButton = new Button("submitButton") {
@@ -74,7 +78,7 @@ public class EditCarPage extends BasePage {
             public void onSubmit() {
                 Car car = new Car();
                 car.setModel(model);
-                car.setDailyFee(Double.valueOf(dailyFee));
+                car.setDailyFee(dailyFee);
                 car.setRegNumber(regNumber);
                 manager.saveCar(car);
  

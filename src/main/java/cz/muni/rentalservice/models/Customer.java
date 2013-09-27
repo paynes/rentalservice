@@ -17,6 +17,7 @@ package cz.muni.rentalservice.models;
 
 import java.io.Serializable;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Customer implements Serializable{
     private Long id;
     private String name; 
     private String surname;
-    private LocalDate born;
+    private LocalDateTime born;
 
     public String getSurname() {
         return surname;
@@ -52,11 +53,11 @@ public class Customer implements Serializable{
         this.name = name;
     }
 
-    public LocalDate getBorn() {
+    public LocalDateTime getBorn() {
         return born;
     }
 
-    public void setBorn(LocalDate dt){
+    public void setBorn(LocalDateTime dt){
         this.born = dt;        
     }
     

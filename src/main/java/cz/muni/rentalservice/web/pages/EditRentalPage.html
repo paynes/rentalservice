@@ -1,25 +1,36 @@
-<!--
-Copyright 2013 paynes.
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
     <body>
-        <div>TODO write content</div>
+        <wicket:extend>
+            <div class="span10">
+                <div class="container">
+                    <h1><span wicket:id="title">Title</span></h1>
+                </div>
+                <div class="container">
+                    <form action="" wicket:id="editRental">
+                        <label for="dateFromLabel" wicket:id="dateFromLabel">Date from</label>
+                        <div wicket:id="dateFrom"></div>
+                        <br/>
+                        
+                        <label for="dateToLabel" wicket:id="dateToLabel">Date to</label>
+                        <div wicket:id="dateTo"></div>
+                        <br/>
+                        
+                        <label for="payementLabel" wicket:id="payementLabel">Paid</label> 
+                        <input type="checkbox" id="booleanProperty" wicket:id="payement"/>
+                        <br/>
+                        
+                        <label for="expectedDaysLabel" wicket:id="expectedDaysLabel">Expected days</label> 
+                        <input type="text" id="name" wicket:id="expectedDays"/>
+                        <br/>
+                        
+                        <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="submitButton">
+                            Save Car
+                        </button>
+                    </form>
+                </div>
+            </div>    
+        </wicket:extend>
     </body>
 </html>

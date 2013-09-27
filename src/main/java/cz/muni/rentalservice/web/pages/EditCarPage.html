@@ -8,21 +8,29 @@
                 <h1><span wicket:id="title">Title</span></h1>
             </div>
             <div class="container">
+                <!--<wicket:enclosure child="feedback">
+                    <div class="alert" wicket:id="feedback">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                    </div>
+                </wicket:enclosure>-->
                 <form action="" wicket:id="editCar">
-                <label for="model" wicket:id="modelLabel">Car model</label> 
+                    <label for="model" wicket:id="modelLabel">Car model</label> 
                     <input type="text" id="name" wicket:id="model"/>
-                <br/>
-                <label for="regNumber" wicket:id="regNumberLabel">Car registration number</label>
+                    <br/>
+                    
+                    <label for="regNumber" wicket:id="regNumberLabel">Car registration number</label>
                     <input type="text" id="name" wicket:id="regNumber"/>
-                 <br/>
-                 <label for="dailyFee" wicket:id="dailyFeeLabel">Daily fee</label>
+                    <br/>
+                     
+                    <label for="dailyFee" wicket:id="dailyFeeLabel">Daily fee</label>
                     <input type="text" id="name" wicket:id="dailyFee"/>
-                 <br/>
-                <!--<input type="submit" value="Save" class="formbutton" name="save" wicket:id="submitButton"/>-->
-                <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="submitButton">
-                    Save Car
-                </button>
-            </form>
+                    <br/>
+                    
+                    <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="submitButton">
+                        Save Car
+                    </button>
+                </form>
             </div>
         </div>
         
