@@ -60,6 +60,8 @@ public class CustomersListPage extends BasePage {
                 Customer customer = (Customer) item.getModelObject();
                 item.add(new Label("id",customer.getId()));
                 item.add(new Label("name", customer.getName()));
+                item.add(new Label("surname", customer.getSurname()));
+                item.add(new Label("born",customer.getBorn()));
             }          
         };
         customers.setVisible(!customers.getList().isEmpty());

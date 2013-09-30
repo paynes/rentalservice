@@ -16,6 +16,7 @@
 package cz.muni.rentalservice.models;
 
 import java.io.Serializable;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -27,8 +28,8 @@ public class Rental implements Serializable{
     private Long id;
     private Car car;
     private Customer customer;
-    private LocalDateTime dateFrom;
-    private LocalDateTime dateTo;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
     private int expectedDays;
     private boolean paid;
 
@@ -44,11 +45,11 @@ public class Rental implements Serializable{
         return customer;
     }
 
-    public LocalDateTime getDateFrom() {
+    public LocalDate getDateFrom() {
         return dateFrom;
     }
 
-    public LocalDateTime getDateTo() {
+    public LocalDate getDateTo() {
         return dateTo;
     }
 
@@ -72,11 +73,11 @@ public class Rental implements Serializable{
         this.customer = customer;
     }
 
-    public void setDateFrom(LocalDateTime dt) {
+    public void setDateFrom(LocalDate dt) {
         this.dateFrom = dt;
     }
 
-    public void setDateTo(LocalDateTime dt) {
+    public void setDateTo(LocalDate dt) {
         this.dateTo = dt;
     }
 

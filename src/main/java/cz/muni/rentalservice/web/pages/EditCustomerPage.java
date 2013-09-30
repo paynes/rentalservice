@@ -26,6 +26,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 
@@ -45,8 +46,7 @@ public class EditCustomerPage extends BasePage {
     
     String name;
     String surname;
-    LocalDateTime born;
-    //String month;
+    LocalDate born;
     
     public EditCustomerPage() {
         addForm();
@@ -89,8 +89,6 @@ public class EditCustomerPage extends BasePage {
                 Customer customer = new Customer();
                 customer.setName(name);
                 customer.setSurname(surname);
-                //customer.setBorn(born);
-                LocalDateTime dt = new LocalDateTime(2013,9,27,0,0);
                 customer.setBorn(born);
                 
                 manager.saveCustomer(customer);
@@ -101,5 +99,6 @@ public class EditCustomerPage extends BasePage {
         };
         
         editCustomer.add(submitButton);
+        
     }
 }

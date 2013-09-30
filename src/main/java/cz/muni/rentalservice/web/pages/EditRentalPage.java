@@ -28,6 +28,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -49,9 +50,9 @@ public class EditRentalPage extends BasePage {
     
     Integer expectedDays;
     
-    LocalDateTime dateFrom;
+    LocalDate dateFrom;
     
-    LocalDateTime dateTo;
+    LocalDate dateTo;
     
     public EditRentalPage() {
         addForm();
@@ -96,11 +97,11 @@ public class EditRentalPage extends BasePage {
             @Override
             public void onSubmit() {
                 Rental r = new Rental();
-                r.setDateFrom(new LocalDateTime(2013,9,27,0,0));
-                r.setDateTo(new LocalDateTime(2013,9,30,0,0));
+                r.setDateFrom(dateFrom);
+                r.setDateTo(dateTo);
                 r.setDays(expectedDays);
                 r.setPaid(payement);
-                r.setCar(carMngr.getCar(Long.valueOf(1)));
+                r.setCar(carMngr.getCar(Long.valueOf(24)));
                 r.setCustomer(customerMngr.getCustomer(Long.valueOf(2)));
                 
                 rentalMngr.saveRental(r);

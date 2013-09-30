@@ -58,6 +58,9 @@ public class CarsListPage extends BasePage{
             protected void populateItem(ListItem item) {  
                 item.add(new Label("id",new PropertyModel<Car>(item.getModel(),"id")));
                 item.add(new Label("model", new PropertyModel<Car>(item.getModel(),"model")));
+                item.add(new Label("dailyFee", new PropertyModel<Car>(item.getModel(),"dailyFee")));
+                item.add(new Label("regNumber", new PropertyModel<Car>(item.getModel(),"regNumber")));
+                
             }
         };
         cars.setVisible(!cars.getList().isEmpty());
@@ -79,4 +82,3 @@ public class CarsListPage extends BasePage{
                 };
     }
 }
-

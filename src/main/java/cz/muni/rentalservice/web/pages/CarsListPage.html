@@ -10,22 +10,24 @@
                     
                 <!-- /container -->
                 <wicket:enclosure child="cars">
-                    <table>
-                        <span wicket:id="cars">
-                            <div class="accordion" id="accordion2">
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse">
-                                            <span wicket:id="id"></span>
-                                        </a>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <span wicket:id="model"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Model</th>
+                                <th>Registration number</th>
+                                <th>Daily fee</th>
+                            </tr>
+                        </thead>
+                        <span wicket:id="cars">       
+                            <tbody>
+                                <tr>
+                                    <td><span wicket:id="id"></span></td>
+                                    <td><span wicket:id="model"></span></td>
+                                    <td><span wicket:id="regNumber"></span></td>
+                                    <td><span wicket:id="dailyFee"></span></td>
+                                </tr>
+                            </tbody>    
                         </span>
                     </table>
                 </wicket:enclosure>
@@ -35,5 +37,10 @@
                 </button>
             </div>
         </wicket:extend>
+        <script type="text/javascript">
+            $(document).ready(function() {     
+                $(".collapse").collapse();
+            });
+        </script>
     </body>
 </html>

@@ -10,22 +10,24 @@
                     
                 <!-- /container -->
                 <wicket:enclosure child="customers">
-                    <table>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Born</th>
+                            </tr>
+                        </thead>
                         <span wicket:id="customers">
-                            <div class="accordion" id="accordion2">
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#">
-                                            <span wicket:id="id"></span>
-                                        </a>
-                                    </div>
-                                    <div id="collapse" class="accordion-body collapse in">
-                                        <div class="accordion-inner">
-                                            <span wicket:id="name"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <tbody>
+                                <tr>
+                                    <td><span wicket:id="id"></span></td>
+                                    <td><span wicket:id="name"></span></td>
+                                    <td><span wicket:id="surname"></span></td>
+                                    <td><span wicket:id="born"></span></td>
+                                </tr>
+                            </tbody>
                         </span>
                     </table>
                 </wicket:enclosure>

@@ -27,7 +27,7 @@ public class Customer implements Serializable{
     private Long id;
     private String name; 
     private String surname;
-    private LocalDateTime born;
+    private LocalDate born;
 
     public String getSurname() {
         return surname;
@@ -53,11 +53,11 @@ public class Customer implements Serializable{
         this.name = name;
     }
 
-    public LocalDateTime getBorn() {
+    public LocalDate getBorn() {
         return born;
     }
 
-    public void setBorn(LocalDateTime dt){
+    public void setBorn(LocalDate dt){
         this.born = dt;        
     }
     

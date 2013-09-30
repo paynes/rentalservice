@@ -76,7 +76,7 @@ public class CustomerManagerImplTest extends AbstractRentalServiceTest {
         final Customer expected = new Customer();
         expected.setName("Peter");
         expected.setSurname("Marcin");
-        expected.setBorn(new LocalDateTime(1995,8,8,0,0));
+        expected.setBorn(new LocalDate(1995,8,8));
         
         manager.saveCustomer(expected);
         assertNotNull(expected.getId());
@@ -103,7 +103,7 @@ public class CustomerManagerImplTest extends AbstractRentalServiceTest {
         final Customer expected = createExistingCustomerMock();
         expected.setName("Honza");
         expected.setSurname("Novak");
-        expected.setBorn(new LocalDateTime(1991,8,8,0,0));
+        expected.setBorn(new LocalDate(1991,8,8));
         
         manager.updateCustomer(expected);
         
@@ -143,7 +143,7 @@ public class CustomerManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(1));
         customer.setName("Peter");
         customer.setSurname("Marcin");
-        customer.setBorn(new LocalDateTime(2008,8,8,0,0));
+        customer.setBorn(new LocalDate(2008,8,8));
         
         return customer;
     }

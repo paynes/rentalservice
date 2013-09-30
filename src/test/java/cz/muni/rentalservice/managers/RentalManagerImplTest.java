@@ -78,8 +78,8 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         final Rental expected = new Rental();
         
         expected.setPaid(true);
-        expected.setDateFrom(new LocalDateTime(1991,9,23,0,0));
-        expected.setDateTo(new LocalDateTime(1991,9,25,0,0));
+        expected.setDateFrom(new LocalDate(1991,9,23));
+        expected.setDateTo(new LocalDate(1991,9,25));
         expected.setDays(2);
         
         Car car = new Car();
@@ -92,7 +92,7 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(1));
         customer.setName("Peter");
         customer.setSurname("Marcin");
-        customer.setBorn(new LocalDateTime(1991,9,23,0,0));
+        customer.setBorn(new LocalDate(1991,9,23));
         
         expected.setCar(car);
         expected.setCustomer(customer);
@@ -135,7 +135,7 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(2));
         customer.setName("Honza");
         customer.setSurname("Novak");
-        customer.setBorn(new LocalDateTime(1990,6,3,0,0));
+        customer.setBorn(new LocalDate(1990,6,3));
         
         expected.setCustomer(customer);
         
@@ -175,8 +175,8 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         Rental rental = new Rental();
         rental.setId(Long.valueOf(1));
         rental.setPaid(true);
-        rental.setDateFrom(new LocalDateTime(1991,9,23,0,0));
-        rental.setDateTo(new LocalDateTime(1991,9,25,0,0));
+        rental.setDateFrom(new LocalDate(1991,9,23));
+        rental.setDateTo(new LocalDate(1991,9,25));
         rental.setDays(2);
         
         Car car = new Car();
@@ -189,7 +189,7 @@ public class RentalManagerImplTest extends AbstractRentalServiceTest {
         customer.setId(Long.valueOf(1));
         customer.setName("Peter");
         customer.setSurname("Marcin");
-        customer.setBorn(new LocalDateTime(1991,9,23,0,0));
+        customer.setBorn(new LocalDate(1991,9,23));
         
         rental.setCar(car);
         rental.setCustomer(customer);
