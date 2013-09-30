@@ -43,8 +43,10 @@ public final class LocalDateHandler implements TypeHandler<LocalDate> {
     public void setParameter(PreparedStatement ps, int i, LocalDate date, JdbcType jt) throws SQLException {
         if (date == null) {
             return;
-        }        
-        ps.setString(i, FORMATTER.print(date));
+        }     
+
+        ps.setDate(i, new java.sql.Date(date.toDateTimeAtStartOfDay().getMillis()));
+
     }
 
     /**

@@ -21,7 +21,6 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 /**
  *
