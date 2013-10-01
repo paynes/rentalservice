@@ -64,6 +64,7 @@ public class EditCarPage extends BasePage {
         
         TextField<String> regNumberField = new TextField<>("regNumber");
         regNumberField.setRequired(true);
+        regNumberField.add(StringValidator.maximumLength(7));
         editForm.add(regNumberField);
         
         Label dailyFeeLabel = new Label("dailyFeeLabel","Daily fee");

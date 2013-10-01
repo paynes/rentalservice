@@ -18,13 +18,20 @@ package cz.muni.rentalservice.web.pages;
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.db.managers.CustomerManager;
 import cz.muni.rentalservice.db.managers.RentalManager;
+import cz.muni.rentalservice.models.Car;
+import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.models.Rental;
 import cz.muni.rentalservice.web.components.DateDropDown;
+import cz.muni.rentalservice.web.components.DateRangeComponent;
+import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -50,9 +57,11 @@ public class EditRentalPage extends BasePage {
     
     Integer expectedDays;
     
-    LocalDate dateFrom;
+    Car car;
     
-    LocalDate dateTo;
+    Customer customer;
+    
+    //List<LocalDate> date;
     
     public EditRentalPage() {
         addForm();
@@ -60,22 +69,14 @@ public class EditRentalPage extends BasePage {
     }
 
     private void addForm() {
-        Form<EditRentalPage> editForm = new Form<>("editRental",
-                new CompoundPropertyModel<>(this));
+        Form<Rental> editForm = new Form<>("editRental",
+                new CompoundPropertyModel<>(new Rental()));
         
         add(editForm);
         
-        Label dateFromLabel = new Label("dateFromLabel", "Date from");
-        editForm.add(dateFromLabel);
-        
-        DateDropDown dateFromField = new DateDropDown("dateFrom");
-        editForm.add(dateFromField);
-        
-        Label dateToLabel = new Label("dateToLabel", "Date to");
-        editForm.add(dateToLabel);
-        
-        DateDropDown dateToField = new DateDropDown("dateTo");
-        editForm.add(dateToField);
+        final DateRangeComponent dateField = new DateRangeComponent("date");
+        dateField.setRequired(true);
+        editForm.add(dateField);
         
         Label expectedDaysLabel = new Label("expectedDaysLabel", "Expected days");
         editForm.add(expectedDaysLabel);
@@ -91,18 +92,35 @@ public class EditRentalPage extends BasePage {
         CheckBox box = new CheckBox("payement");
         editForm.add(box);
         
+        Label carLabel = new Label("carLabel", "Car");
+        editForm.add(carLabel);
+        
+        DropDownChoice<Car> carField = new DropDownChoice<>("car",carMngr.getCars());
+        carField.setRequired(true);
+        editForm.add(carField);
+        
+        
+        Label customerLabel = new Label("customerLabel", "Customer");
+        editForm.add(customerLabel);
+        
+        DropDownChoice<Customer> customerField = new DropDownChoice<>("customer", customerMngr.getCustomers());
+        customerField.setRequired(true);
+        editForm.add(customerField);
+        
         
         Button submitButton = new Button("submitButton") {
             
             @Override
             public void onSubmit() {
                 Rental r = new Rental();
-                r.setDateFrom(dateFrom);
-                r.setDateTo(dateTo);
+                //r.setDateFrom(date);
+                //r.setDateTo();
+                r.setDateFrom(new LocalDate(2013,1,1));
+                r.setDateTo(new LocalDate(2013,1,5));
                 r.setDays(expectedDays);
                 r.setPaid(payement);
-                r.setCar(carMngr.getCar(Long.valueOf(24)));
-                r.setCustomer(customerMngr.getCustomer(Long.valueOf(2)));
+                r.setCar(car);
+                r.setCustomer(customer);
                 
                 rentalMngr.saveRental(r);
                 
@@ -112,6 +130,9 @@ public class EditRentalPage extends BasePage {
         };
         
         editForm.add(submitButton);
+        
+        FeedbackPanel feed = new FeedbackPanel("feed");
+        editForm.add(feed);
     }
     
 }

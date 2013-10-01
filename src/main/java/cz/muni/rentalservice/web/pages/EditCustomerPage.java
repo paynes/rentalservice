@@ -23,11 +23,11 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 
 
@@ -44,9 +44,9 @@ public class EditCustomerPage extends BasePage {
     private CarManager cManager;
     
     
-    String name;
-    String surname;
-    LocalDate born;
+    private String name;
+    private String surname;
+    private LocalDate born;
     
     public EditCustomerPage() {
         addForm();
@@ -64,6 +64,7 @@ public class EditCustomerPage extends BasePage {
         editCustomer.add(dropLabel);
         
         DateDropDown bornField = new DateDropDown("born");
+        bornField.setRequired(true);
         editCustomer.add(bornField);
         
         Label nameLabel = new Label("nameLabel","Customers name");
@@ -99,6 +100,8 @@ public class EditCustomerPage extends BasePage {
         };
         
         editCustomer.add(submitButton);
+        FeedbackPanel feed = new FeedbackPanel("feed");
+        editCustomer.add(feed);
         
     }
 }

@@ -16,8 +16,8 @@
 package cz.muni.rentalservice.models;
 
 import java.io.Serializable;
+import java.util.List;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -31,7 +31,8 @@ public class Rental implements Serializable{
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private int expectedDays;
-    private boolean paid;
+    private boolean payement;
+    private List<LocalDate> date;
 
     public Long getId() {
         return id;
@@ -39,6 +40,14 @@ public class Rental implements Serializable{
 
     public Car getCar() {
         return car;
+    }
+    
+    public void setDate(List<LocalDate> list) {
+        this.date = list;
+    }
+    
+    public List<LocalDate> getDate() {
+        return date;
     }
 
     public Customer getCustomer() {
@@ -58,7 +67,7 @@ public class Rental implements Serializable{
     }
 
     public boolean isPaid() {
-        return paid;
+        return payement;
     }
 
     public void setId(Long id) {
@@ -86,14 +95,14 @@ public class Rental implements Serializable{
     }
 
     public void setPaid(boolean paid) {
-        this.paid = paid;
+        this.payement = paid;
     }
 
     @Override
     public String toString() {
         return "Rental{" + "id=" + id + ", car=" + car + ", customer=" + 
                 customer + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + 
-                    ", expectedDays=" + expectedDays + ", paid=" + paid + '}';
+                    ", expectedDays=" + expectedDays + ", paid=" + payement + '}';
     }
 
     @Override

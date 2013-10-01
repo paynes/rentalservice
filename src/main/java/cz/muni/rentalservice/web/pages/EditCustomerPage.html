@@ -9,6 +9,10 @@
                 </div>
                 <div class="container">
                     <form action="" wicket:id="editCustomer">
+                        <wicket:enclosure child="feed">
+                            <div wicket:id="feed"></div>
+                        </wicket:enclosure>
+                        
                         <label for="name" wicket:id="nameLabel">Car model</label> 
                         <input type="text" id="name" wicket:id="name"/>
                         <br/>

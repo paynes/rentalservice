@@ -9,13 +9,11 @@
                 </div>
                 <div class="container">
                     <form action="" wicket:id="editRental">
-                        <label for="dateFromLabel" wicket:id="dateFromLabel">Date from</label>
-                        <div wicket:id="dateFrom"></div>
-                        <br/>
+                        <wicket:enclosure child="feed">
+                            <div wicket:id="feed"></div>
+                        </wicket:enclosure>
                         
-                        <label for="dateToLabel" wicket:id="dateToLabel">Date to</label>
-                        <div wicket:id="dateTo"></div>
-                        <br/>
+                        <div wicket:id="date"></div>
                         
                         <label for="payementLabel" wicket:id="payementLabel">Paid</label> 
                         <input type="checkbox" id="booleanProperty" wicket:id="payement"/>
@@ -23,6 +21,14 @@
                         
                         <label for="expectedDaysLabel" wicket:id="expectedDaysLabel">Expected days</label> 
                         <input type="text" id="name" wicket:id="expectedDays"/>
+                        <br/>
+                        
+                        <label for="carLabel" wicket:id="carLabel">Car</label>
+                        <select wicket:id="car"></select>
+                        <br/>
+                        
+                        <label for="customerLabel" wicket:id="customerLabel">Customer</label>
+                        <select wicket:id="customer"></select>
                         <br/>
                         
                         <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="submitButton">

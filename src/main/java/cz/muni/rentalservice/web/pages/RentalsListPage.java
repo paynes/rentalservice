@@ -22,6 +22,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -46,6 +47,8 @@ public class RentalsListPage extends BasePage {
             }
             
         });
+        
+        add(new FeedbackPanel("feed"));
     }
 
     private void addRentalsModule() {
@@ -62,6 +65,7 @@ public class RentalsListPage extends BasePage {
         rentals.setVisible(!rentals.getList().isEmpty());
         
         add(rentals);
+        
         
         Label noRentals = new Label("noRentals", "V databaze nie su ziadne zaznamy.");
         noRentals.setVisible(!rentals.isVisible());
