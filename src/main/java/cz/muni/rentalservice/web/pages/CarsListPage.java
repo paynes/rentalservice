@@ -17,11 +17,16 @@ package cz.muni.rentalservice.web.pages;
 
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
+import cz.muni.rentalservice.web.components.DeleteButton;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -53,14 +58,17 @@ public class CarsListPage extends BasePage{
     }
     
     private void addCarsModule() {
-        ListView<Car> cars = new ListView<Car>("cars",createModelForCars()) {
+        ListView<Car> cars;
+        cars = new ListView<Car>("cars",createModelForCars()) {
             @Override
-            protected void populateItem(ListItem item) {  
-                item.add(new Label("id",new PropertyModel<Car>(item.getModel(),"id")));
-                item.add(new Label("model", new PropertyModel<Car>(item.getModel(),"model")));
-                item.add(new Label("dailyFee", new PropertyModel<Car>(item.getModel(),"dailyFee")));
-                item.add(new Label("regNumber", new PropertyModel<Car>(item.getModel(),"regNumber")));
-                
+            protected void populateItem(ListItem<Car> item) {
+                Car car = (Car) item.getModelObject();
+                item.add(new Label("id",car.getId()));
+                item.add(new Label("model", car.getModel()));
+                item.add(new Label("dailyFee", car.getDailyFee()));
+                item.add(new Label("regNumber", car.getRegNumber()));
+                item.add(new DeleteButton("delete",item.getModel()));
+  
             }
         };
         cars.setVisible(!cars.getList().isEmpty());
