@@ -28,16 +28,18 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
  */
 public class DeleteButton extends Button {
     
+    private Car car;
+    
     @SpringBean
     CarManager manager;
     public DeleteButton(String id, IModel model) {
         super(id,model);
+        car = (Car) model.getObject();
     }
     
     @Override
     public void onSubmit() {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAA");
-        Car car = (Car)getParent().getDefaultModelObject();
+        //Car car = (Car)getParent().getDefaultModelObject();
         manager.removeCar(car);
         setResponsePage(new CarsListPage());
     }
