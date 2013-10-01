@@ -13,22 +13,28 @@
                     
                 <!-- /container -->
                 <wicket:enclosure child="rentals">
-                    <table>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Car</th>
+                                <th>Customer</th>
+                                <th>Paid</th>
+                                <th>Date from</th>
+                                <th>Date to</th>
+                            </tr>
+                        </thead>
                         <span wicket:id="rentals">
-                            <div class="accordion" id="accordion2">
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#">
-                                            <span wicket:id="id"></span>
-                                        </a>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <span wicket:id="name"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <tbody>
+                                    <tr>
+                                        <td><span wicket:id="id"></span></td>
+                                        <td><span wicket:id="car"></span></td>
+                                        <td><span wicket:id="customer"></span></td>
+                                        <td><span wicket:id="payement"></span></td>
+                                        <td><span wicket:id="dateFrom"></span></td>
+                                        <td><span wicket:id="dateTo"></span></td>
+                                    </tr>
+                                </tbody>
                         </span>
                     </table>
                 </wicket:enclosure>

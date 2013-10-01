@@ -21,22 +21,19 @@ import cz.muni.rentalservice.db.managers.RentalManager;
 import cz.muni.rentalservice.models.Car;
 import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.models.Rental;
-import cz.muni.rentalservice.web.components.DateDropDown;
 import cz.muni.rentalservice.web.components.DateRangeComponent;
-import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -95,7 +92,8 @@ public class EditRentalPage extends BasePage {
         Label carLabel = new Label("carLabel", "Car");
         editForm.add(carLabel);
         
-        DropDownChoice<Car> carField = new DropDownChoice<>("car",carMngr.getCars());
+        ChoiceRenderer<Car> carRenderer = new ChoiceRenderer<>("model");
+        DropDownChoice<Car> carField = new DropDownChoice<>("car",carMngr.getCars(),carRenderer);
         carField.setRequired(true);
         editForm.add(carField);
         
@@ -103,7 +101,8 @@ public class EditRentalPage extends BasePage {
         Label customerLabel = new Label("customerLabel", "Customer");
         editForm.add(customerLabel);
         
-        DropDownChoice<Customer> customerField = new DropDownChoice<>("customer", customerMngr.getCustomers());
+        ChoiceRenderer<Customer> customerRenderer = new ChoiceRenderer<>("surname");
+        DropDownChoice<Customer> customerField = new DropDownChoice<>("customer", customerMngr.getCustomers(),customerRenderer);
         customerField.setRequired(true);
         editForm.add(customerField);
         

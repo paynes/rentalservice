@@ -15,12 +15,11 @@
  */
 package cz.muni.rentalservice.web.components;
 
-import com.sun.org.apache.bcel.internal.generic.LoadClass;
-import com.sun.org.apache.xerces.internal.xs.LSInputList;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
+import org.apache.wicket.model.ComponentDetachableModel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
@@ -67,7 +66,6 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
     
     public DateDropDown(String id) {
         super(id);
-        
         initLists();
     }
     
@@ -78,7 +76,7 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
                 new LoadableDetachableModel<List<Integer>>() {
                     @Override
                     protected List<Integer> load() {
-                        return days;
+                        return months;
                     }
                 });
         monthField.setRequired(this.isRequired());
@@ -105,8 +103,8 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
         add(yearField);
     }
     
-    public List<Integer> getMonths() {
-        return this.months;
+    public Integer getMonth() {
+        return this.month;
     }
     
     public Integer getDay() {
@@ -136,7 +134,7 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
         setDay(dayField.getConvertedInput());
         setYear(yearField.getConvertedInput());
         try {
-            setConvertedInput(new LocalDate(getYear(),month,getDay()));
+            setConvertedInput(new LocalDate(getYear(),getMonth(),getDay()));
         } catch (IllegalArgumentException ex) {
             this.warn("Zadany datum neexistuje.");
         }

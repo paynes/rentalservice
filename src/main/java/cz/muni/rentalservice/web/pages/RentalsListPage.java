@@ -19,6 +19,7 @@ import cz.muni.rentalservice.db.managers.RentalManager;
 import cz.muni.rentalservice.models.Rental;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -49,6 +50,7 @@ public class RentalsListPage extends BasePage {
         });
         
         add(new FeedbackPanel("feed"));
+        
     }
 
     private void addRentalsModule() {
@@ -58,7 +60,11 @@ public class RentalsListPage extends BasePage {
             protected void populateItem(ListItem item) {
                 Rental rental = (Rental) item.getModelObject();
                 item.add(new Label("id",rental.getId()));
-                item.add(new Label("name",rental.getCustomer().getName()));
+                item.add(new Label("customer",rental.getCustomer().getSurname()));
+                item.add(new Label("car",rental.getCar().getModel()));
+                item.add(new Label("payement",rental.isPaid()));
+                item.add(new Label("dateFrom",rental.getDateFrom()));
+                item.add(new Label("dateTo",rental.getDateTo()));
             }          
         };
         

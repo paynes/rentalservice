@@ -17,7 +17,6 @@ package cz.muni.rentalservice.managers;
 
 import java.util.List;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
