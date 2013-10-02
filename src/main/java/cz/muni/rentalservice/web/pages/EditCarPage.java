@@ -112,6 +112,5 @@ public final class EditCarPage extends BasePage {
         this.car.setModel(parameters.get("model").toString());
         this.car.setRegNumber(parameters.get("regNumber").toString());
         this.car.setDailyFee(parameters.get("dailyFee").toDouble());
-    }
-    
+    }    
 }
