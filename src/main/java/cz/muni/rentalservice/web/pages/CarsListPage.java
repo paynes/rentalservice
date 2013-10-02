@@ -22,7 +22,10 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 
@@ -49,13 +52,14 @@ public class CarsListPage extends BasePage{
                 setResponsePage(new EditCarPage());
             }
         });
+        add(new FeedbackPanel("feed"));
     }
     
     private void addCarsModule() {
         ListView<Car> cars;
         cars = new ListView<Car>("cars",createModelForCars()) {
             @Override
-            protected void populateItem(ListItem<Car> item) {
+            protected void populateItem(final ListItem<Car> item) {
                 final Car car = (Car) item.getModelObject();
                 item.add(new Label("id",car.getId()));
                 item.add(new Label("model", car.getModel()));
@@ -65,7 +69,6 @@ public class CarsListPage extends BasePage{
 
                     @Override
                     public void onClick() {
-                        //Car car = manager.getCar(car)
                         manager.removeCar(car);
                         setResponsePage(new CarsListPage());
                     }
@@ -75,7 +78,12 @@ public class CarsListPage extends BasePage{
 
                     @Override
                     public void onClick() {
-                        setResponsePage(new EditCarPage());
+                        PageParameters pageParameters = new PageParameters();
+                        pageParameters.add("id",car.getId());
+                        pageParameters.add("model", car.getModel());
+			pageParameters.add("dailyFee", car.getDailyFee());
+			pageParameters.add("regNumber", car.getRegNumber());
+                        setResponsePage(new EditCarPage(pageParameters));
                     }
                     
                 });
