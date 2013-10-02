@@ -101,11 +101,12 @@ public final class EditCustomerPage extends BasePage {
                 
                 if (customer.getId() == null) {
                     manager.saveCustomer(customer);
+                    getSession().info("Customer added successfully");
                 } else {
                     manager.updateCustomer(customer);
+                    getSession().info("Customer edited successfully");
                 }
                 
-                getSession().info("Customer added successfully");
                 setResponsePage(CustomersListPage.class);
             }
         };

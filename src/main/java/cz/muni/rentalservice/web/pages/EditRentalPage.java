@@ -147,11 +147,12 @@ public final class EditRentalPage extends BasePage {
                 
                 if (rental.getId() == null) {
                     rentalMngr.saveRental(rental);
+                    getSession().info("Rental added successfully.");
                 } else {
                     rentalMngr.updateRental(rental);
+                    getSession().info("Rental edited successfully.");
                 }
                 
-                getSession().info("Rental added successfully.");
                 setResponsePage(RentalsListPage.class);
             }
         };

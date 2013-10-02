@@ -90,11 +90,12 @@ public final class EditCarPage extends BasePage {
                 car.setRegNumber(regNumberField.getModelObject());
                 if (car.getId() == null) {
                     manager.saveCar(car);
+                    getSession().info("Car added successfully");
                 } else {
                     manager.updateCar(car);
+                    getSession().info("Car edited successfully");
                 }
  
-                getSession().info("Car added successfully");
                 setResponsePage(CarsListPage.class);
             }
         };
