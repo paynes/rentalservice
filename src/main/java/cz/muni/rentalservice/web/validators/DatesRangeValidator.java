@@ -27,9 +27,9 @@ import org.joda.time.LocalDate;
  */
 public class DatesRangeValidator extends AbstractFormValidator {
     
-    private final FormComponent<DateDropDown>[] components;
+    private final FormComponent<?>[] components;
     
-    public DatesRangeValidator(DateDropDown d1, DateDropDown d2) {
+    public DatesRangeValidator(FormComponent d1, FormComponent d2) {
         if (d1 == null) {
             throw new IllegalArgumentException("argument d1 cannot be null.");
         }
@@ -49,6 +49,11 @@ public class DatesRangeValidator extends AbstractFormValidator {
 
     @Override
     public void validate(Form<?> form) {
+        final DateDropDown d1 = (DateDropDown) components[0];
+        final DateDropDown d2 = (DateDropDown) components[1];
         
+        if (d1.getLocalDate().isAfter(d2.getLocalDate())) {
+            error(d1,this.variablesMap());
+        }
     }
 }

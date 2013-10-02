@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.joda.time.LocalDate;
 
@@ -29,7 +28,7 @@ import org.joda.time.LocalDate;
  */
 public class DateDropDown extends FormComponentPanel<LocalDate> {
     
-    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Integer month;
     private Integer day;
@@ -42,6 +41,8 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
     private List<Integer> months;
     private List<Integer> days;
     private List<Integer> years;
+    
+    private LocalDate localDate;
     
     private void initLists() {
         months = new ArrayList<>();
@@ -106,6 +107,14 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
     public void setYear(Integer year) {
         this.year = year;
     }
+    
+    public LocalDate getLocalDate() {
+        return this.localDate;
+    }
+    
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
    
     
     @Override
@@ -114,7 +123,8 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
         setDay(dayField.getConvertedInput());
         setYear(yearField.getConvertedInput());
         try {
-            setConvertedInput(new LocalDate(getYear(),getMonth(),getDay()));
+            setLocalDate(new LocalDate(getYear(),getMonth(),getDay()));
+            setConvertedInput(new LocalDate(getLocalDate()));
         } catch (IllegalArgumentException ex) {
             this.warn("Zadany datum neexistuje.");
         }

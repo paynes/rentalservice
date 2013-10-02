@@ -22,7 +22,7 @@ import cz.muni.rentalservice.models.Car;
 import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.models.Rental;
 import cz.muni.rentalservice.web.components.DateDropDown;
-import cz.muni.rentalservice.web.components.DateRangeComponent;
+import cz.muni.rentalservice.web.validators.DatesRangeValidator;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -118,6 +118,8 @@ public class EditRentalPage extends BasePage {
         DropDownChoice<Customer> customerField = new DropDownChoice<>("customer", customerMngr.getCustomers(),customerRenderer);
         customerField.setRequired(true);
         editForm.add(customerField);
+        
+        editForm.add(new DatesRangeValidator(dateFromField,dateToField));
         
         
         Button submitButton = new Button("submitButton") {
