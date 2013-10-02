@@ -24,6 +24,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 /**
@@ -77,7 +78,14 @@ public class CustomersListPage extends BasePage {
 
                     @Override
                     public void onClick() {
-                        setResponsePage(new EditCustomerPage());
+                        PageParameters parameters = new PageParameters();
+                        parameters.add("id", customer.getId());
+                        parameters.add("name", customer.getName());
+                        parameters.add("surname", customer.getSurname());
+                        parameters.add("day",customer.getBorn().getDayOfMonth());
+                        parameters.add("month", customer.getBorn().getMonthOfYear());
+                        parameters.add("year", customer.getBorn().getYear());
+                        setResponsePage(new EditCustomerPage(parameters));
                     }
                     
                 });

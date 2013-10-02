@@ -24,6 +24,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 /**
@@ -77,7 +78,19 @@ public class RentalsListPage extends BasePage {
 
                     @Override
                     public void onClick() {
-                        setResponsePage(new EditRentalPage());
+                        PageParameters parameters = new PageParameters();
+                        parameters.add("id", rental.getId());
+                        parameters.add("customer",rental.getCustomer().getId());
+                        parameters.add("car",rental.getCar().getId());
+                        parameters.add("payement",rental.isPaid());
+                        parameters.add("expected",rental.getDays());
+                        parameters.add("dayFrom",rental.getDateFrom().getDayOfMonth());
+                        parameters.add("monthFrom",rental.getDateFrom().getMonthOfYear());
+                        parameters.add("yearFrom", rental.getDateFrom().getYear());
+                        parameters.add("dayTo",rental.getDateTo().getDayOfMonth());
+                        parameters.add("monthTo",rental.getDateTo().getMonthOfYear());
+                        parameters.add("yearTo", rental.getDateTo().getYear());
+                        setResponsePage(new EditRentalPage(parameters));
                     }
                     
                 });

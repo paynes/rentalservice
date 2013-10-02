@@ -86,8 +86,8 @@ public final class EditCarPage extends BasePage {
             @Override
             public void onSubmit() {
                 car.setModel(modelField.getModelObject());
-                car.setDailyFee(Double.valueOf(dailyFeeField.getModelObject().toString()));
-                car.setRegNumber(regNumberField.getModelObject().toString());
+                car.setDailyFee(dailyFeeField.getModelObject());
+                car.setRegNumber(regNumberField.getModelObject());
                 if (car.getId() == null) {
                     manager.saveCar(car);
                 } else {
