@@ -58,13 +58,22 @@ public class RentalsListPage extends BasePage {
 
             @Override
             protected void populateItem(ListItem item) {
-                Rental rental = (Rental) item.getModelObject();
+                final Rental rental = (Rental) item.getModelObject();
                 item.add(new Label("id",rental.getId()));
                 item.add(new Label("customer",rental.getCustomer().getSurname()));
                 item.add(new Label("car",rental.getCar().getModel()));
                 item.add(new Label("payement",rental.isPaid()));
                 item.add(new Label("dateFrom",rental.getDateFrom()));
                 item.add(new Label("dateTo",rental.getDateTo()));
+                item.add(new Link("delete") {
+
+                    @Override
+                    public void onClick() {
+                        manager.deleteRental(rental);
+                        setResponsePage(new RentalsListPage());
+                    }
+                    
+                });
             }          
         };
         

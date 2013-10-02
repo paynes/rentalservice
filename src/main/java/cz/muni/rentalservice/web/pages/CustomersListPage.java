@@ -59,11 +59,20 @@ public class CustomersListPage extends BasePage {
 
             @Override
             protected void populateItem(ListItem item) {
-                Customer customer = (Customer) item.getModelObject();
+                final Customer customer = (Customer) item.getModelObject();
                 item.add(new Label("id",customer.getId()));
                 item.add(new Label("name", customer.getName()));
                 item.add(new Label("surname", customer.getSurname()));
                 item.add(new Label("born",customer.getBorn()));
+                item.add(new Link("delete") {
+
+                    @Override
+                    public void onClick() {
+                       manager.removeCustomer(customer);
+                       setResponsePage(new CustomersListPage());
+                    }
+                    
+                });
             }          
         };
         customers.setVisible(!customers.getList().isEmpty());

@@ -57,13 +57,21 @@ public class CarsListPage extends BasePage{
         cars = new ListView<Car>("cars",createModelForCars()) {
             @Override
             protected void populateItem(ListItem<Car> item) {
-                Car car = (Car) item.getModelObject();
+                final Car car = (Car) item.getModelObject();
                 item.add(new Label("id",car.getId()));
                 item.add(new Label("model", car.getModel()));
                 item.add(new Label("dailyFee", car.getDailyFee()));
                 item.add(new Label("regNumber", car.getRegNumber()));
-                item.add(new DeleteButton("delete",item.getModel()));
-  
+                item.add(new Link("delete") {
+
+                    @Override
+                    public void onClick() {
+                        //Car car = manager.getCar(car)
+                        manager.removeCar(car);
+                        setResponsePage(new CarsListPage());
+                    }
+                    
+                });
             }
         };
         cars.setVisible(!cars.getList().isEmpty());

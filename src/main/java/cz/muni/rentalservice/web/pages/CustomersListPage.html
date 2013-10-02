@@ -13,7 +13,7 @@
                     
                 <!-- /container -->
                 <wicket:enclosure child="customers">
-                    <table class="table table-bordered">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -29,6 +29,11 @@
                                     <td><span wicket:id="name"></span></td>
                                     <td><span wicket:id="surname"></span></td>
                                     <td><span wicket:id="born"></span></td>
+                                    <td>
+                                        <button type="delete" class="btn btn-danger" data-toggle="button" wicket:id="delete">
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </span>
