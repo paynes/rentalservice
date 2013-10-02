@@ -15,13 +15,40 @@
  */
 package cz.muni.rentalservice.web.validators;
 
-import org.apache.wicket.validation.validator.DateValidator;
+import cz.muni.rentalservice.web.components.DateDropDown;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
+import org.joda.time.LocalDate;
 
 /**
  *
  * @author paynes
  */
-public class DatesRangeValidator extends DateValidator {
+public class DatesRangeValidator extends AbstractFormValidator {
     
-    //Dates
+    private final FormComponent<DateDropDown>[] components;
+    
+    public DatesRangeValidator(DateDropDown d1, DateDropDown d2) {
+        if (d1 == null) {
+            throw new IllegalArgumentException("argument d1 cannot be null.");
+        }
+        
+        if (d2 == null) {
+            throw new IllegalArgumentException("argument d1 cannot be null.");
+        }
+        LocalDate d = (LocalDate) d1.getDefaultModelObject();
+        //d.
+        components = new FormComponent[] {d1,d2};
+    }
+
+    @Override
+    public FormComponent<?>[] getDependentFormComponents() {
+        return components;
+    }
+
+    @Override
+    public void validate(Form<?> form) {
+        
+    }
 }

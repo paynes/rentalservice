@@ -21,6 +21,7 @@ import cz.muni.rentalservice.db.managers.RentalManager;
 import cz.muni.rentalservice.models.Car;
 import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.models.Rental;
+import cz.muni.rentalservice.web.components.DateDropDown;
 import cz.muni.rentalservice.web.components.DateRangeComponent;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
@@ -58,7 +59,9 @@ public class EditRentalPage extends BasePage {
     
     Customer customer;
     
-    //List<LocalDate> date;
+    LocalDate dateFrom;
+    
+    LocalDate dateTo;
     
     public EditRentalPage() {
         addForm();
@@ -66,14 +69,24 @@ public class EditRentalPage extends BasePage {
     }
 
     private void addForm() {
-        Form<Rental> editForm = new Form<>("editRental",
-                new CompoundPropertyModel<>(new Rental()));
+        Form<EditRentalPage> editForm = new Form<>("editRental",
+                new CompoundPropertyModel<>(this));
         
         add(editForm);
         
-        final DateRangeComponent dateField = new DateRangeComponent("date");
-        dateField.setRequired(true);
-        editForm.add(dateField);
+        Label dateFromLabel = new Label("dateFromLabel", "Date from");
+        editForm.add(dateFromLabel);
+        
+        DateDropDown dateFromField = new DateDropDown("dateFrom");
+        dateFromField.setRequired(true);
+        editForm.add(dateFromField);
+        
+        Label dateToLabel = new Label("dateToLabel", "Date to");
+        editForm.add(dateToLabel);
+        
+        DateDropDown dateToField = new DateDropDown("dateTo");
+        dateToField.setRequired(true);
+        editForm.add(dateToField);
         
         Label expectedDaysLabel = new Label("expectedDaysLabel", "Expected days");
         editForm.add(expectedDaysLabel);
@@ -112,10 +125,8 @@ public class EditRentalPage extends BasePage {
             @Override
             public void onSubmit() {
                 Rental r = new Rental();
-                //r.setDateFrom(date);
-                //r.setDateTo();
-                r.setDateFrom(new LocalDate(2013,1,1));
-                r.setDateTo(new LocalDate(2013,1,5));
+                r.setDateFrom(dateFrom);
+                r.setDateTo(dateTo);
                 r.setDays(expectedDays);
                 r.setPaid(payement);
                 r.setCar(car);

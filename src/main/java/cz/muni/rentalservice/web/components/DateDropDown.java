@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
-import org.apache.wicket.model.ComponentDetachableModel;
-import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.joda.time.LocalDate;
@@ -72,33 +70,15 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        monthField = new DropDownChoice<>("month", new PropertyModel<Integer>(this,"month"),
-                new LoadableDetachableModel<List<Integer>>() {
-                    @Override
-                    protected List<Integer> load() {
-                        return months;
-                    }
-                });
+        monthField = new DropDownChoice<>("month", new PropertyModel<Integer>(this,"month"),months);
         monthField.setRequired(this.isRequired());
         add(monthField);
         
-        dayField = new DropDownChoice<>("day", new PropertyModel<Integer>(this,"day"),
-                new LoadableDetachableModel<List<Integer>>() {
-                    @Override
-                    protected List<Integer> load() {
-                        return days;
-                    }
-                });
+        dayField = new DropDownChoice<>("day", new PropertyModel<Integer>(this,"day"),days);
         dayField.setRequired(this.isRequired());
         add(dayField);
         
-        yearField = new DropDownChoice<>("year", new PropertyModel<Integer>(this,"year"),
-                new LoadableDetachableModel<List<Integer>>() {
-                    @Override
-                    protected List<Integer> load() {
-                        return years;
-                    }
-                });
+        yearField = new DropDownChoice<>("year", new PropertyModel<Integer>(this,"year"),years);
         yearField.setRequired(this.isRequired());
         add(yearField);
     }
