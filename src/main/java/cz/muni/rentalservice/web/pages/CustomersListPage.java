@@ -73,6 +73,14 @@ public class CustomersListPage extends BasePage {
                     }
                     
                 });
+                item.add(new Link("edit") {
+
+                    @Override
+                    public void onClick() {
+                        setResponsePage(new EditCustomerPage());
+                    }
+                    
+                });
             }          
         };
         customers.setVisible(!customers.getList().isEmpty());

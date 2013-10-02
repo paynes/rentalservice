@@ -17,7 +17,6 @@ package cz.muni.rentalservice.web.pages;
 
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
-import cz.muni.rentalservice.web.components.DeleteButton;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -69,6 +68,14 @@ public class CarsListPage extends BasePage{
                         //Car car = manager.getCar(car)
                         manager.removeCar(car);
                         setResponsePage(new CarsListPage());
+                    }
+                    
+                });
+                item.add(new Link("edit"){
+
+                    @Override
+                    public void onClick() {
+                        setResponsePage(new EditCarPage());
                     }
                     
                 });
