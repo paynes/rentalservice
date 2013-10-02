@@ -8,13 +8,11 @@
                 <h1><span wicket:id="title">Title</span></h1>
             </div>
             <div class="container">
-                <!--<wicket:enclosure child="feedback">
-                    <div class="alert" wicket:id="feedback">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Warning!</strong> Best check yo self, you're not looking too good.
-                    </div>
-                </wicket:enclosure>-->
                 <form action="" wicket:id="editCar">
+                    <wicket:enclosure child="feed">
+                        <div wicket:id="feed"></div>
+                    </wicket:enclosure>
+                    
                     <label for="model" wicket:id="modelLabel">Car model</label> 
                     <input type="text" id="name" wicket:id="model"/>
                     <br/>
@@ -32,8 +30,7 @@
                     </button>
                 </form>
             </div>
-        </div>
-        
+        </div>        
     </wicket:extend>
 </body>
 </html>
