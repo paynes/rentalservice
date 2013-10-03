@@ -14,8 +14,7 @@ import cz.muni.rentalservice.test.AbstractRentalServiceTest;
 
 /**
  *
- * @author Jan Ferko
- * @sa.date 2013-09-25T15:24:50+0100
+ * @author paynes
  */
 public abstract class AbstractRentalServiceWebTest extends AbstractRentalServiceTest {
     

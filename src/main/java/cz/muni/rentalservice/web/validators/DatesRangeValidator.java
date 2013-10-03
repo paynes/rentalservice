@@ -19,7 +19,6 @@ import cz.muni.rentalservice.web.components.DateDropDown;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
-import org.joda.time.LocalDate;
 
 /**
  *
@@ -37,8 +36,6 @@ public class DatesRangeValidator extends AbstractFormValidator {
         if (d2 == null) {
             throw new IllegalArgumentException("argument d1 cannot be null.");
         }
-        LocalDate d = (LocalDate) d1.getDefaultModelObject();
-        //d.
         components = new FormComponent[] {d1,d2};
     }
 
