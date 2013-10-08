@@ -17,7 +17,6 @@ package cz.muni.rentalservice.models;
 
 import java.io.Serializable;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 /**
  *

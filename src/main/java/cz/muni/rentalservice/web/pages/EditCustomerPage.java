@@ -21,6 +21,7 @@ import cz.muni.rentalservice.web.components.DateDropDown;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -66,13 +67,7 @@ public final class EditCustomerPage extends BasePage {
         Label dropLabel = new Label("dropLabel","Choose date of birth");
         form.add(dropLabel);
         
-        final DateDropDown bornField = new DateDropDown("born");
-        if (customer.getBorn() != null) {
-            bornField.setDay(customer.getBorn().getDayOfMonth());
-            bornField.setMonth(customer.getBorn().getMonthOfYear());
-            bornField.setYear(customer.getBorn().getYear());
-        }
-        bornField.setRequired(true);
+        final FormComponentPanel<LocalDate> bornField = new DateDropDown("born");
         form.add(bornField);
         
         Label nameLabel = new Label("nameLabel","Customers name");
@@ -97,7 +92,7 @@ public final class EditCustomerPage extends BasePage {
             public void onSubmit() {
                 customer.setName(nameField.getModelObject());
                 customer.setSurname(surnameField.getModelObject());
-                customer.setBorn(bornField.getModelObject());
+                //customer.setBorn(bornField.getModelObject());
                 
                 if (customer.getId() == null) {
                     manager.saveCustomer(customer);
@@ -123,6 +118,6 @@ public final class EditCustomerPage extends BasePage {
         this.customer.setName(parameters.get("name").toString());
         this.customer.setSurname(parameters.get("surname").toString());
         LocalDate dt = new LocalDate(parameters.get("year").toInt(),parameters.get("month").toInt(),parameters.get("day").toInt());
-        this.customer.setBorn(dt);
+        //this.customer.setBorn(dt);
     }
 }

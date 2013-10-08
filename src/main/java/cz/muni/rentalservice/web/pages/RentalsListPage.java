@@ -63,6 +63,7 @@ public class RentalsListPage extends BasePage {
                 item.add(new Label("customer",rental.getCustomer().getSurname()));
                 item.add(new Label("car",rental.getCar().getModel()));
                 item.add(new Label("payement",rental.isPaid()));
+                item.add(new Label("expectedDays",rental.getDays()));
                 item.add(new Label("dateFrom",rental.getDateFrom()));
                 item.add(new Label("dateTo",rental.getDateTo()));
                 item.add(new Link("delete") {
@@ -90,7 +91,8 @@ public class RentalsListPage extends BasePage {
                         parameters.add("dayTo",rental.getDateTo().getDayOfMonth());
                         parameters.add("monthTo",rental.getDateTo().getMonthOfYear());
                         parameters.add("yearTo", rental.getDateTo().getYear());
-                        setResponsePage(new EditRentalPage(parameters));
+                        EditRentalPage e = new EditRentalPage(parameters);
+                        setResponsePage(e);
                     }
                     
                 });

@@ -55,14 +55,20 @@ public final class EditCarPage extends BasePage {
     
 
     private void addForm() {        
-        form = new Form("editCar",new CompoundPropertyModel<>(car));
+        form = new Form("editCar",new CompoundPropertyModel<>(car)) {
+            @Override
+            protected void onSubmit(){
+                
+            }
+        };
+        
         
         add(form);
                 
         Label modelLabel = new Label("modelLabel","Model");
         form.add(modelLabel);
         
-        final TextField<String> modelField = new TextField<>("model",new PropertyModel(car, "model"));
+        final TextField<String> modelField = new TextField<>("model");
         modelField.setRequired(true);
         modelField.add(StringValidator.maximumLength(50));
         form.add(modelField);
@@ -70,7 +76,7 @@ public final class EditCarPage extends BasePage {
         Label regNumberLabel = new Label("regNumberLabel", "Registration Number");
         form.add(regNumberLabel);
         
-        final TextField<String> regNumberField = new TextField<>("regNumber",new PropertyModel(car, "regNumber"));
+        final TextField<String> regNumberField = new TextField<>("regNumber");
         regNumberField.setRequired(true);
         regNumberField.add(StringValidator.maximumLength(7));
         form.add(regNumberField);
@@ -78,7 +84,7 @@ public final class EditCarPage extends BasePage {
         Label dailyFeeLabel = new Label("dailyFeeLabel","Daily fee");
         form.add(dailyFeeLabel);
         
-        final TextField<Double> dailyFeeField = new TextField<>("dailyFee",new PropertyModel(car,"dailyFee"));
+        final TextField<Double> dailyFeeField = new TextField<>("dailyFee");
         dailyFeeField.setRequired(true);
         form.add(dailyFeeField);
         

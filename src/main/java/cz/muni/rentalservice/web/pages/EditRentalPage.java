@@ -33,7 +33,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
@@ -79,11 +78,12 @@ public final class EditRentalPage extends BasePage {
         
         final DateDropDown dateFromField = new DateDropDown("dateFrom");
         if (rental.getDateFrom() != null) {
-            dateFromField.setDay(rental.getDateFrom().getDayOfMonth());
-            dateFromField.setMonth(rental.getDateFrom().getMonthOfYear());
-            dateFromField.setYear(rental.getDateFrom().getYear());
+            //dateFromField.setDay(rental.getDateFrom().getDayOfMonth());
+            //dateFromField.setMonth(rental.getDateFrom().getMonthOfYear());
+            //dateFromField.setYear(rental.getDateFrom().getYear());
             dateFromField.setRequired(true);
         }
+        dateFromField.setRequired(true);
         form.add(dateFromField);
         
         Label dateToLabel = new Label("dateToLabel", "Date to");
@@ -91,9 +91,9 @@ public final class EditRentalPage extends BasePage {
         
         final DateDropDown dateToField = new DateDropDown("dateTo");
         if (rental.getDateTo() != null) {
-            dateToField.setDay(rental.getDateTo().getDayOfMonth());
-            dateToField.setMonth(rental.getDateTo().getMonthOfYear());
-            dateToField.setYear(rental.getDateTo().getYear());
+            //dateToField.setDay(rental.getDateTo().getDayOfMonth());
+            //dateToField.setMonth(rental.getDateTo().getMonthOfYear());
+            //dateToField.setYear(rental.getDateTo().getYear());
             dateToField.setRequired(true);
         }
         dateToField.setRequired(true);

@@ -15,12 +15,13 @@
  */
 package cz.muni.rentalservice.web.components;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.wicket.markup.html.form.DropDownChoice;
+
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
-import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.model.Model;
 import org.joda.time.LocalDate;
+
 
 /**
  *
@@ -29,102 +30,47 @@ import org.joda.time.LocalDate;
 public class DateDropDown extends FormComponentPanel<LocalDate> {
     
     private static final long serialVersionUID = 1L;
+    
+    private final TextField<Integer> dayField;
+    private final TextField<Integer> monthField;
+    private final TextField<Integer> yearField;
 
-    private Integer month;
-    private Integer day;
-    private Integer year;
-    
-    private DropDownChoice<Integer> monthField;
-    private DropDownChoice<Integer> dayField;
-    private DropDownChoice<Integer> yearField;
-    
-    private List<Integer> months;
-    private List<Integer> days;
-    private List<Integer> years;
-    
-    private LocalDate localDate;
-    
-    private void initLists() {
-        months = new ArrayList<>();
-        for (int i = 1; i<13;i++) {
-            months.add(i);
-        }
-        
-        years = new ArrayList<>();
-        
-        for (int i = 1930; i<2051;i++) {
-            years.add(i);
-        }
-        
-        days = new ArrayList<>();
-        
-        for (int i = 1;i<32;i++) {
-            days.add(i);
-        }
-    }
-    
     public DateDropDown(String id) {
         super(id);
-        initLists();
+        
+        add(new Label("dayLabel","Day"));
+        dayField = new TextField<>("day",new Model<Integer>());
+        
+        add(new Label("monthLabel","Month"));
+        monthField = new TextField<>("month",new Model<Integer>());
+        
+        add(new Label("yearLabel","Year"));
+        yearField = new TextField<>("year",new Model<Integer>());
     }
     
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        monthField = new DropDownChoice<>("month", new PropertyModel<Integer>(this,"month"),months);
-        monthField.setRequired(this.isRequired());
-        add(monthField);
-        
-        dayField = new DropDownChoice<>("day", new PropertyModel<Integer>(this,"day"),days);
+
         dayField.setRequired(this.isRequired());
+        //RangeValidator<Integer> validator = new RangeValidator<>(1,31);
+        //dayField.add(validator);
         add(dayField);
         
-        yearField = new DropDownChoice<>("year", new PropertyModel<Integer>(this,"year"),years);
+        monthField.setRequired(this.isRequired());
+        //monthField.add(new RangeValidator<>(1,12));
+        add(monthField);
+        
         yearField.setRequired(this.isRequired());
         add(yearField);
-    }
-    
-    public Integer getMonth() {
-        return this.month;
-    }
-    
-    public Integer getDay() {
-        return this.day;
-    }
-    
-    public Integer getYear() {
-        return this.year;
-    }
-    
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-    
-    public void setDay(Integer day) {
-        this.day = day;
-    }
-    
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-    
-    public LocalDate getLocalDate() {
-        return this.localDate;
-    }
-    
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+        
     }
    
     
     @Override
     protected void convertInput() {
-        setMonth(monthField.getConvertedInput());
-        setDay(dayField.getConvertedInput());
-        setYear(yearField.getConvertedInput());
         try {
-            setLocalDate(new LocalDate(getYear(),getMonth(),getDay()));
-            setConvertedInput(new LocalDate(getLocalDate()));
+            setConvertedInput(new LocalDate(yearField.getConvertedInput(),monthField.getConvertedInput(),dayField.getConvertedInput()));
         } catch (IllegalArgumentException ex) {
             this.warn("Zadany datum neexistuje.");
         }
