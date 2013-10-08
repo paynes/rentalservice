@@ -42,10 +42,13 @@ public final class EditCustomerPage extends BasePage {
     @SpringBean
     private CustomerManager manager;
     
+    
+    //TODO odstranit
     private Form form;
 
     private Customer customer;
     
+    //TODO Opravit konstruktory
     public EditCustomerPage() {
         this.customer = new Customer();
         addForm();
@@ -59,6 +62,7 @@ public final class EditCustomerPage extends BasePage {
     }
 
     private void addForm() {
+        //TODO odstranit property modely
         form = new Form<>("editCustomer", new CompoundPropertyModel<>(customer));
         
         add(form);
@@ -86,6 +90,8 @@ public final class EditCustomerPage extends BasePage {
         surnameField.add(StringValidator.maximumLength(20));
         form.add(surnameField);
         
+        
+        //TODO odstranit a submit vo forme spravit
         Button submitButton = new Button("submitButton") {
             
             @Override
@@ -106,13 +112,16 @@ public final class EditCustomerPage extends BasePage {
             }
         };
         
+        System.out.println(getDefaultModelObject());
         form.add(submitButton);
+        System.out.println(getDefaultModelObject());
         FeedbackPanel feed = new FeedbackPanel("feed");
         form.add(feed);
         
     }
     
     public void initCustomer(final PageParameters parameters) {
+        //TODO prepareCustomer a tahat z databazy
         this.customer = new Customer();
         this.customer.setId(parameters.get("id").toLong());
         this.customer.setName(parameters.get("name").toString());

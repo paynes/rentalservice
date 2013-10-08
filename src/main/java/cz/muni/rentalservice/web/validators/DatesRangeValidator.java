@@ -49,8 +49,9 @@ public class DatesRangeValidator extends AbstractFormValidator {
         final DateDropDown d1 = (DateDropDown) components[0];
         final DateDropDown d2 = (DateDropDown) components[1];
         
-        //if (d1.getLocalDate().isAfter(d2.getLocalDate())) {
-        //    form.error("Date from is after date to.");
-        //}
+        if (d1.getModelObject().isAfter(d2.getModelObject())) {
+            //TODO lokalizacia a presnejsia hlaska
+            form.error("Date from is after date to.");
+        }
     }
 }
