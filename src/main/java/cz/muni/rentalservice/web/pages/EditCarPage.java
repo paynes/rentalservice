@@ -18,12 +18,10 @@ package cz.muni.rentalservice.web.pages;
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -37,60 +35,46 @@ public final class EditCarPage extends BasePage {
     @SpringBean
     private CarManager manager;
     
-    private Form form;
-    
-    private Car car;
-    
     public EditCarPage() {
-        this.car = new Car();
-        add(new Label("title","Edit car"));
-        addForm();
+        Car car = new Car();
+        init(car);
     }
     
     public EditCarPage(final PageParameters parameters) {
-        initCar(parameters);
+        Car car = prepareCar(parameters);
+        init(car);
+    }
+    
+    private void init(Car car) {
         add(new Label("title","Edit car"));
-        addForm();
+        addForm(car);
     }
     
 
-    private void addForm() {        
-        form = new Form("editCar",new CompoundPropertyModel<>(car)) {
-            @Override
-            protected void onSubmit(){
-                
-            }
-        };
-        
-        
-        add(form);
-                
+    private void addForm(final Car car) {
         Label modelLabel = new Label("modelLabel","Model");
-        form.add(modelLabel);
         
         final TextField<String> modelField = new TextField<>("model");
         modelField.setRequired(true);
         modelField.add(StringValidator.maximumLength(50));
-        form.add(modelField);
         
         Label regNumberLabel = new Label("regNumberLabel", "Registration Number");
-        form.add(regNumberLabel);
         
         final TextField<String> regNumberField = new TextField<>("regNumber");
         regNumberField.setRequired(true);
         regNumberField.add(StringValidator.maximumLength(7));
-        form.add(regNumberField);
         
         Label dailyFeeLabel = new Label("dailyFeeLabel","Daily fee");
-        form.add(dailyFeeLabel);
         
         final TextField<Double> dailyFeeField = new TextField<>("dailyFee");
         dailyFeeField.setRequired(true);
-        form.add(dailyFeeField);
         
-        Button submitButton = new Button("submitButton") {
+        FeedbackPanel feed = new FeedbackPanel("feed");
+        
+        
+        Form<Car> form = new Form("editCar",new CompoundPropertyModel<>(car)) {
             @Override
-            public void onSubmit() {
+            protected void onSubmit(){
                 car.setModel(modelField.getModelObject());
                 car.setDailyFee(dailyFeeField.getModelObject());
                 car.setRegNumber(regNumberField.getModelObject());
@@ -106,17 +90,30 @@ public final class EditCarPage extends BasePage {
             }
         };
         
-        FeedbackPanel feed = new FeedbackPanel("feed");
-        form.add(feed);
         
-        form.add(submitButton);
+        add(form);
+                
+        form.add(modelLabel);
+        form.add(modelField);
+        form.add(regNumberLabel);
+        form.add(regNumberField);        
+        form.add(dailyFeeLabel);
+        form.add(dailyFeeField);       
+        form.add(feed);
     }
     
-    public void initCar(final PageParameters parameters) {
-        this.car = new Car();
-        this.car.setId(parameters.get("id").toLong());
-        this.car.setModel(parameters.get("model").toString());
-        this.car.setRegNumber(parameters.get("regNumber").toString());
-        this.car.setDailyFee(parameters.get("dailyFee").toDouble());
-    }    
+    private Car prepareCar(final PageParameters parameters) {
+        Car c;
+        if (parameters == null) {          
+            c = new Car();
+        } else {
+            c = manager.getCar(parameters.get("id").toLong());
+        }
+        
+        if (c == null) {
+            c = new Car();
+        }
+        
+        return c;
+    }   
 }

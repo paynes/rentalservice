@@ -72,6 +72,7 @@ public final class EditCustomerPage extends BasePage {
         form.add(dropLabel);
         
         final FormComponentPanel<LocalDate> bornField = new DateDropDown("born");
+        bornField.setRequired(true);
         form.add(bornField);
         
         Label nameLabel = new Label("nameLabel","Customers name");

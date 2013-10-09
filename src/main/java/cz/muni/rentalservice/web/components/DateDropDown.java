@@ -32,46 +32,46 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
     
     private static final long serialVersionUID = 1L;
     
-    private final TextField<Integer> dayField;
-    private final TextField<Integer> monthField;
-    private final TextField<Integer> yearField;
+    private  final TextField<Integer> dayField;
+    private  final TextField<Integer> monthField;
+    private  final TextField<Integer> yearField;
 
     public DateDropDown(String id) {
         super(id);
         
         add(new Label("dayLabel","Day"));
-        dayField = new TextField<>("day",new Model<Integer>());
+        dayField = new TextField<>("day", new Model<Integer>(),Integer.class);
         
         add(new Label("monthLabel","Month"));
-        monthField = new TextField<>("month",new Model<Integer>());
+        monthField = new TextField<>("month",new Model<Integer>(),Integer.class);
         
         add(new Label("yearLabel","Year"));
-        yearField = new TextField<>("year",new Model<Integer>());
+        yearField = new TextField<>("year",new Model<Integer>(),Integer.class);
     }
-    
+     
     @Override
     protected void onInitialize() {
         super.onInitialize();
 
         dayField.setRequired(this.isRequired());
-        //RangeValidator<Integer> validator = new RangeValidator<>(1,31);
-        //dayField.add(validator);
+        RangeValidator<Integer> validator = new RangeValidator<>(1,31);
+        dayField.add(new RangeValidator<>(1,31));
         add(dayField);
         
         monthField.setRequired(this.isRequired());
-        //monthField.add(new RangeValidator<>(1,12));
+        monthField.add(new RangeValidator<>(1,12));
         add(monthField);
         
         yearField.setRequired(this.isRequired());
+        yearField.add(new RangeValidator<>(1900,LocalDate.now().getYear()));
         add(yearField);
         
     }
    
-    
     @Override
     protected void convertInput() {
         try {
-            setConvertedInput(new LocalDate(yearField.getConvertedInput(),monthField.getConvertedInput(),dayField.getConvertedInput()));
+            setConvertedInput(new LocalDate(yearField.getConvertedInput(),monthField.getConvertedInput(), dayField.getConvertedInput()));
         } catch (IllegalArgumentException ex) {
             this.warn("Zadany datum neexistuje.");
         }

@@ -85,6 +85,7 @@ public class CarsListPage extends BasePage{
                 });
             }
         };
+        
         cars.setVisible(!cars.getList().isEmpty());
         
         add(cars);
