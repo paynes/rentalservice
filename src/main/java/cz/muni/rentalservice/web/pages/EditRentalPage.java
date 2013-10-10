@@ -103,14 +103,7 @@ public final class EditRentalPage extends BasePage {
         
         Form<Rental> form = new Form("editRental", new CompoundPropertyModel<>(rental)) {
             @Override
-            public void onSubmit() {
-                rental.setDateFrom(dateFromField.getModelObject());
-                rental.setDateTo(dateToField.getModelObject());
-                rental.setDays(expectedDaysField.getModelObject());
-                rental.setPaid(box.getModelObject());
-                rental.setCar(carField.getModelObject());
-                rental.setCustomer(customerField.getModelObject());
-                
+            public void onSubmit() {                
                 if (rental.getId() == null) {
                     rentalMngr.saveRental(rental);
                     getSession().info("Rental added successfully.");
@@ -118,7 +111,6 @@ public final class EditRentalPage extends BasePage {
                     rentalMngr.updateRental(rental);
                     getSession().info("Rental edited successfully.");
                 }
-                
                 setResponsePage(RentalsListPage.class);
             }
         };

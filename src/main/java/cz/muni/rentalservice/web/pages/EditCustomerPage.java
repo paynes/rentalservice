@@ -81,11 +81,7 @@ public final class EditCustomerPage extends BasePage {
         
         Form<Customer> form = new Form("editCustomer", new CompoundPropertyModel<>(customer)) {
             @Override
-            public void onSubmit() {
-                customer.setName(nameField.getModelObject());
-                customer.setSurname(surnameField.getModelObject());
-                //customer.setBorn(bornField.getModelObject());
-                
+            public void onSubmit() {                
                 if (customer.getId() == null) {
                     manager.saveCustomer(customer);
                     getSession().info("Customer added successfully");
@@ -93,7 +89,6 @@ public final class EditCustomerPage extends BasePage {
                     manager.updateCustomer(customer);
                     getSession().info("Customer edited successfully");
                 }
-                
                 setResponsePage(CustomersListPage.class);
             }
         };

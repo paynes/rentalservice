@@ -75,9 +75,6 @@ public final class EditCarPage extends BasePage {
         Form<Car> form = new Form("editCar",new CompoundPropertyModel<>(car)) {
             @Override
             protected void onSubmit(){
-                car.setModel(modelField.getModelObject());
-                car.setDailyFee(dailyFeeField.getModelObject());
-                car.setRegNumber(regNumberField.getModelObject());
                 if (car.getId() == null) {
                     manager.saveCar(car);
                     getSession().info("Car added successfully");
@@ -85,7 +82,6 @@ public final class EditCarPage extends BasePage {
                     manager.updateCar(car);
                     getSession().info("Car edited successfully");
                 }
- 
                 setResponsePage(CarsListPage.class);
             }
         };
