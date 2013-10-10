@@ -24,7 +24,6 @@ import cz.muni.rentalservice.models.Rental;
 import cz.muni.rentalservice.web.components.DateDropDown;
 import cz.muni.rentalservice.web.validators.DatesRangeValidator;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -52,12 +51,12 @@ public final class EditRentalPage extends BasePage {
     private RentalManager rentalMngr;
     
     public EditRentalPage() {
-        Rental rental = new Rental();
+        final Rental rental = new Rental();
         init(rental);
     }
     
     public EditRentalPage(PageParameters parameters) {
-        Rental rental = prepareRental(parameters);
+        final Rental rental = prepareRental(parameters);
         init(rental);
     }
     

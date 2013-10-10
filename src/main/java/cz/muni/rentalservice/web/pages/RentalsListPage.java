@@ -24,6 +24,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -37,7 +38,7 @@ public class RentalsListPage extends BasePage {
     private RentalManager manager;
     
     public RentalsListPage() {
-        add(new Label("message", "Rentals"));
+        add(new Label("title", new ResourceModel("rentals.title")));
         addRentalsModule();
         
         add(new Link<BasePage>("EditRentalPage") {

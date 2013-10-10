@@ -24,6 +24,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -41,7 +42,7 @@ public class CustomersListPage extends BasePage {
     }
     
     private void initComponents() {
-        add(new Label("message", "Customers"));
+        add(new Label("title", new ResourceModel("customers.title")));
         addCustomersModule();
         
         add(new Link<BasePage>("EditCustomerPage") {

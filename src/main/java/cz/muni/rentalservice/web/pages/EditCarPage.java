@@ -36,12 +36,12 @@ public final class EditCarPage extends BasePage {
     private CarManager manager;
     
     public EditCarPage() {
-        Car car = new Car();
+        final Car car = new Car();
         init(car);
     }
     
     public EditCarPage(final PageParameters parameters) {
-        Car car = prepareCar(parameters);
+        final Car car = prepareCar(parameters);
         init(car);
     }
     
@@ -50,7 +50,6 @@ public final class EditCarPage extends BasePage {
         addForm(car);
     }
     
-
     private void addForm(final Car car) {
         Label modelLabel = new Label("modelLabel","Model");
         

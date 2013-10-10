@@ -19,14 +19,11 @@ import cz.muni.rentalservice.db.managers.CustomerManager;
 import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.web.components.DateDropDown;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -43,14 +40,13 @@ public final class EditCustomerPage extends BasePage {
     @SpringBean
     private CustomerManager manager;
     
-    //TODO Opravit konstruktory
     public EditCustomerPage() {
-        Customer customer = new Customer();
+        final Customer customer = new Customer();
         init(customer);
     }
     
     public EditCustomerPage(final PageParameters parameters) {
-        Customer customer = prepareCustomer(parameters);
+        final Customer customer = prepareCustomer(parameters);
         init(customer);
     }
     

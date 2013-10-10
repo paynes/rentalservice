@@ -18,12 +18,14 @@ package cz.muni.rentalservice.web.pages;
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
 import java.util.List;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -43,7 +45,7 @@ public class CarsListPage extends BasePage{
     }
     
     public final void initComponents() {
-        add(new Label("message", "Cars"));
+        add(new Label("title", new ResourceModel("cars.title")));
         add(new Link<BasePage>("EditCarPage") {
 
             @Override
