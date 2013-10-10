@@ -25,6 +25,7 @@ import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -42,59 +43,43 @@ public final class EditCustomerPage extends BasePage {
     @SpringBean
     private CustomerManager manager;
     
-    
-    //TODO odstranit
-    private Form form;
-
-    private Customer customer;
-    
     //TODO Opravit konstruktory
     public EditCustomerPage() {
-        this.customer = new Customer();
-        addForm();
-        add(new Label("title", "Edit Customer"));
+        Customer customer = new Customer();
+        init(customer);
     }
     
     public EditCustomerPage(final PageParameters parameters) {
-        initCustomer(parameters);
-        addForm();
+        Customer customer = prepareCustomer(parameters);
+        init(customer);
+    }
+    
+    private void init(Customer customer) {
         add(new Label("title", "Edit Customer"));
+        addForm(customer);
     }
 
-    private void addForm() {
-        //TODO odstranit property modely
-        form = new Form<>("editCustomer", new CompoundPropertyModel<>(customer));
-        
-        add(form);
-        
-        
+    private void addForm(final Customer customer) {
         Label dropLabel = new Label("dropLabel","Choose date of birth");
-        form.add(dropLabel);
         
         final FormComponentPanel<LocalDate> bornField = new DateDropDown("born");
         bornField.setRequired(true);
-        form.add(bornField);
         
         Label nameLabel = new Label("nameLabel","Customers name");
-        form.add(nameLabel);
         
-        final TextField<String> nameField = new TextField<>("name", new PropertyModel(customer, "name"));
+        final TextField<String> nameField = new TextField<>("name");
         nameField.setRequired(true);
         nameField.add(StringValidator.maximumLength(20));
-        form.add(nameField);
         
         Label surnameLabel = new Label("surnameLabel","Customers surname");
-        form.add(surnameLabel);
         
-        final TextField<String> surnameField = new TextField("surname", new PropertyModel(customer, "surname"));
+        final TextField<String> surnameField = new TextField("surname");
         surnameField.setRequired(true);
         surnameField.add(StringValidator.maximumLength(20));
-        form.add(surnameField);
         
+        FeedbackPanel feed = new FeedbackPanel("feed");
         
-        //TODO odstranit a submit vo forme spravit
-        Button submitButton = new Button("submitButton") {
-            
+        Form<Customer> form = new Form("editCustomer", new CompoundPropertyModel<>(customer)) {
             @Override
             public void onSubmit() {
                 customer.setName(nameField.getModelObject());
@@ -113,21 +98,23 @@ public final class EditCustomerPage extends BasePage {
             }
         };
         
-        System.out.println(getDefaultModelObject());
-        form.add(submitButton);
-        System.out.println(getDefaultModelObject());
-        FeedbackPanel feed = new FeedbackPanel("feed");
+        add(form);
+        
+        form.add(dropLabel);
+        form.add(bornField);
+        form.add(nameLabel);
+        form.add(nameField);
+        form.add(surnameLabel);
+        form.add(surnameField);
         form.add(feed);
         
     }
     
-    public void initCustomer(final PageParameters parameters) {
-        //TODO prepareCustomer a tahat z databazy
-        this.customer = new Customer();
-        this.customer.setId(parameters.get("id").toLong());
-        this.customer.setName(parameters.get("name").toString());
-        this.customer.setSurname(parameters.get("surname").toString());
-        LocalDate dt = new LocalDate(parameters.get("year").toInt(),parameters.get("month").toInt(),parameters.get("day").toInt());
-        //this.customer.setBorn(dt);
+    private Customer prepareCustomer(final PageParameters parameters) {
+        Customer c = manager.getCustomer(parameters.get("id").toLong());
+        if (c == null) {
+            return new Customer();
+        }
+        return c;
     }
 }

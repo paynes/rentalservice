@@ -80,11 +80,6 @@ public class CustomersListPage extends BasePage {
                     public void onClick() {
                         PageParameters parameters = new PageParameters();
                         parameters.add("id", customer.getId());
-                        parameters.add("name", customer.getName());
-                        parameters.add("surname", customer.getSurname());
-                        parameters.add("day",customer.getBorn().getDayOfMonth());
-                        parameters.add("month", customer.getBorn().getMonthOfYear());
-                        parameters.add("year", customer.getBorn().getYear());
                         setResponsePage(new EditCustomerPage(parameters));
                     }
                     

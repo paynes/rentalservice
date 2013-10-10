@@ -35,7 +35,6 @@ import org.apache.wicket.validation.validator.RangeValidator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.joda.time.LocalDate;
 
 /**
  *
@@ -51,91 +50,58 @@ public final class EditRentalPage extends BasePage {
     
     @SpringBean
     private RentalManager rentalMngr;
-
-    Form form;
-    
-    Rental rental;
     
     public EditRentalPage() {
-        this.rental = new Rental();
-        addForm();
-        add(new Label("title","Edit rental"));
+        Rental rental = new Rental();
+        init(rental);
     }
     
     public EditRentalPage(PageParameters parameters) {
-        initRental(parameters);
-        addForm();
-        add(new Label("title","Edit rental"));
+        Rental rental = prepareRental(parameters);
+        init(rental);
+    }
+    
+    private void init(Rental rental) {
+        add(new Label("title", "Edit rental"));
+        addForm(rental);
     }
 
-    private void addForm() {
-        form = new Form<>("editRental", new CompoundPropertyModel<>(rental));
-        
-        add(form);
-        
+    private void addForm(final Rental rental) {
         Label dateFromLabel = new Label("dateFromLabel", "Date from");
-        form.add(dateFromLabel);
         
         final DateDropDown dateFromField = new DateDropDown("dateFrom");
-        if (rental.getDateFrom() != null) {
-            //dateFromField.setDay(rental.getDateFrom().getDayOfMonth());
-            //dateFromField.setMonth(rental.getDateFrom().getMonthOfYear());
-            //dateFromField.setYear(rental.getDateFrom().getYear());
-            dateFromField.setRequired(true);
-        }
         dateFromField.setRequired(true);
-        form.add(dateFromField);
         
         Label dateToLabel = new Label("dateToLabel", "Date to");
-        form.add(dateToLabel);
         
         final DateDropDown dateToField = new DateDropDown("dateTo");
-        if (rental.getDateTo() != null) {
-            //dateToField.setDay(rental.getDateTo().getDayOfMonth());
-            //dateToField.setMonth(rental.getDateTo().getMonthOfYear());
-            //dateToField.setYear(rental.getDateTo().getYear());
-            dateToField.setRequired(true);
-        }
         dateToField.setRequired(true);
-        form.add(dateToField);
         
         Label expectedDaysLabel = new Label("expectedDaysLabel", "Expected days");
-        form.add(expectedDaysLabel);
         
         final TextField<Integer> expectedDaysField = new TextField<>("expectedDays");
         RangeValidator<Integer> validator = new RangeValidator<>(1,Integer.MAX_VALUE);
         expectedDaysField.add(validator);
-        form.add(expectedDaysField);
         
         Label payementLabel = new Label("payementLabel", "Paid");
-        form.add(payementLabel);
         
         final CheckBox box = new CheckBox("payement");
-
-        form.add(box);
         
         Label carLabel = new Label("carLabel", "Car");
-        form.add(carLabel);
         
         ChoiceRenderer<Car> carRenderer = new ChoiceRenderer<>("model");
         final DropDownChoice<Car> carField = new DropDownChoice<>("car",carMngr.getCars(),carRenderer);
         carField.setRequired(true);
-        form.add(carField);
-        
         
         Label customerLabel = new Label("customerLabel", "Customer");
-        form.add(customerLabel);
         
         ChoiceRenderer<Customer> customerRenderer = new ChoiceRenderer<>("surname");
         final DropDownChoice<Customer> customerField = new DropDownChoice<>("customer", customerMngr.getCustomers(),customerRenderer);
         customerField.setRequired(true);
-        form.add(customerField);
         
-        form.add(new DatesRangeValidator(dateFromField,dateToField));
+        FeedbackPanel feed = new FeedbackPanel("feed");
         
-        
-        Button submitButton = new Button("submitButton") {
-            
+        Form<Rental> form = new Form("editRental", new CompoundPropertyModel<>(rental)) {
             @Override
             public void onSubmit() {
                 rental.setDateFrom(dateFromField.getModelObject());
@@ -157,23 +123,30 @@ public final class EditRentalPage extends BasePage {
             }
         };
         
-        form.add(submitButton);
+        add(form);
         
-        FeedbackPanel feed = new FeedbackPanel("feed");
+        form.add(dateFromLabel);
+        form.add(dateFromField);
+        form.add(dateToLabel);
+        form.add(dateToField);
+        form.add(expectedDaysLabel);
+        form.add(expectedDaysField);
+        form.add(payementLabel);
+        form.add(box);
+        form.add(carLabel);
+        form.add(carField);
+        form.add(customerLabel);
+        form.add(customerField);
+        form.add(new DatesRangeValidator(dateFromField,dateToField));
         form.add(feed);
     }
     
-    public void initRental(final PageParameters parameters) {
-        this.rental = new Rental();
-        this.rental.setId(parameters.get("id").toLong());
-        this.rental.setCar(carMngr.getCar(parameters.get("car").toLong()));
-        this.rental.setCustomer(customerMngr.getCustomer(parameters.get("customer").toLong()));
-        this.rental.setPaid(parameters.get("payement").toBoolean());
-        this.rental.setDays(parameters.get("expected").toInt());
-        LocalDate from = new LocalDate(parameters.get("yearFrom").toInt(),parameters.get("monthFrom").toInt(),parameters.get("dayFrom").toInt());
-        LocalDate to = new LocalDate(parameters.get("yearTo").toInt(),parameters.get("monthTo").toInt(),parameters.get("dayTo").toInt());
-        this.rental.setDateFrom(from);
-        this.rental.setDateTo(to);
+    private Rental prepareRental(final PageParameters parameters) {
+        Rental rental = rentalMngr.getRental(parameters.get("id").toLong());
+        if (rental == null) {
+            return new Rental();
+        }
+        return rental;
     }
     
 }

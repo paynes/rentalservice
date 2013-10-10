@@ -103,17 +103,10 @@ public final class EditCarPage extends BasePage {
     }
     
     private Car prepareCar(final PageParameters parameters) {
-        Car c;
-        if (parameters == null) {          
-            c = new Car();
-        } else {
-            c = manager.getCar(parameters.get("id").toLong());
-        }
-        
+        Car c = manager.getCar(parameters.get("id").toLong());
         if (c == null) {
-            c = new Car();
+            return new Car();
         }
-        
         return c;
     }   
 }
