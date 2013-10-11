@@ -31,12 +31,12 @@
                                     <td><span wicket:id="dailyFee"></span></td>
                                     <td>
                                         <button type="delete" class="btn btn-danger" data-toggle="button" wicket:id="delete">
-                                            Delete
+                                            <wicket:message key="button.delete"/>
                                         </button>
                                     </td>
                                     <td>
                                         <button type="delete" class="btn btn-warning" data-toggle="button" wicket:id="edit">
-                                            Edit
+                                            <wicket:message key="button.edit"/>
                                         </button>
                                     </td>
                                 </tr>
@@ -46,7 +46,7 @@
                 </wicket:enclosure>
                 <div wicket:id="noCars"/>
                 <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="EditCarPage">
-                        Add Car
+                    <wicket:message key="cars.add.button"/>
                 </button>
             </div>
         </wicket:extend>

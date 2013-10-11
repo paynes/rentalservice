@@ -18,11 +18,10 @@ package cz.muni.rentalservice.web.validators;
 import cz.muni.rentalservice.web.components.DateDropDown;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.wicket.Localizer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.model.ResourceModel;
 
 /**
  *
@@ -52,14 +51,12 @@ public class DatesRangeValidator extends AbstractFormValidator {
     public void validate(Form<?> form) {
         final DateDropDown d1 = (DateDropDown) components[0];
         final DateDropDown d2 = (DateDropDown) components[1];
-        
-        if (d1.getModelObject().isAfter(d2.getModelObject())) {
-            //TODO lokalizacia a presnejsia hlaska
-            //Map var = new HashMap();
-            //var.put("from",d1.getModelObject());
-            //var.put("to",d2.getModelObject());
-            //String value = Localizer.get().getString("validator.error",d1,Model.ofMap(var));
-            form.error("Date from is after date to.");
+
+        if (d1.getConvertedInput().isAfter(d2.getConvertedInput())) {
+            Map var = new HashMap();
+            var.put("from",d1.getConvertedInput());
+            var.put("to",d2.getConvertedInput());
+            form.error(new ResourceModel("validator.error").getObject(),var);
         }
     }
 }

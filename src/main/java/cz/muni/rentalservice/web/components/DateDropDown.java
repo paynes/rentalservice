@@ -50,23 +50,20 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
 
         if (getModelObject() != null) {
             dayField.setModelObject(getModelObject().getDayOfMonth());
+            monthField.setModelObject(getModelObject().getMonthOfYear());
+            yearField.setModelObject(getModelObject().getYear());
         }
+        
         dayField.setRequired(this.isRequired());
         dayField.add(new RangeValidator<>(1,31));
         add(dayField);
-        
-        if (getModelObject() != null) {
-            monthField.setModelObject(getModelObject().getMonthOfYear());
-        }
+             
         monthField.setRequired(this.isRequired());
         monthField.add(new RangeValidator<>(1,12));
         add(monthField);
-        
-        if (getModelObject() != null) {
-            yearField.setModelObject(getModelObject().getYear());
-        }
+
         yearField.setRequired(this.isRequired());
-        yearField.add(new RangeValidator<>(1900,LocalDate.now().getYear()));
+        yearField.add(new RangeValidator<>(1900,2100));
         add(yearField);
         
     }

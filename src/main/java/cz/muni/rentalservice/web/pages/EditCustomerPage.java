@@ -72,7 +72,6 @@ public final class EditCustomerPage extends BasePage {
             public void onSubmit() {                
                 if (customer.getId() == null) {
                     manager.saveCustomer(customer);
-                    //TODO
                     getSession().info(getString("customers.added"));
                 } else {
                     manager.updateCustomer(customer);

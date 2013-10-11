@@ -37,12 +37,12 @@
                                         <td><span wicket:id="dateTo"></span></td>
                                         <td>
                                             <button type="delete" class="btn btn-danger" data-toggle="button" wicket:id="delete">
-                                                Delete
+                                                <wicket:message key="button.delete"/>
                                             </button>
                                         </td>
                                         <td>
                                             <button type="delete" class="btn btn-warning" data-toggle="button" wicket:id="edit">
-                                                Edit
+                                                <wicket:message key="button.edit"/>
                                             </button>
                                         </td>
                                     </tr>
@@ -52,7 +52,7 @@
                 </wicket:enclosure>
                 <div wicket:id="noRentals"/>
                 <button type="submitButton" class="btn btn-primary" data-toggle="button" wicket:id="EditRentalPage">
-                    Add rental
+                    <wicket:message key="rentals.add.button"/>
                 </button>
             </div>
         </wicket:extend>

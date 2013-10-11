@@ -91,7 +91,6 @@ public final class EditRentalPage extends BasePage {
             public void onSubmit() {                
                 if (rental.getId() == null) {
                     rentalMngr.saveRental(rental);
-                    //TODO
                     getSession().info(getString("rentals.added"));
                 } else {
                     rentalMngr.updateRental(rental);

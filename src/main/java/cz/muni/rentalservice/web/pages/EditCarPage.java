@@ -21,7 +21,6 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -54,8 +53,7 @@ public final class EditCarPage extends BasePage {
         final TextField<String> modelField = new TextField<>("model");
         modelField.setRequired(true);
         modelField.add(StringValidator.maximumLength(50));
-        
-        
+                
         final TextField<String> regNumberField = new TextField<>("regNumber");
         regNumberField.setRequired(true);
         regNumberField.add(StringValidator.maximumLength(7));
@@ -64,14 +62,12 @@ public final class EditCarPage extends BasePage {
         dailyFeeField.setRequired(true);
         
         FeedbackPanel feed = new FeedbackPanel("feed");
-        
-        
+                
         Form<Car> form = new Form("editCar",new CompoundPropertyModel<>(car)) {
             @Override
             protected void onSubmit(){
                 if (car.getId() == null) {
                     manager.saveCar(car);
-                    //TODO
                     getSession().info(getString("cars.added"));
                 } else {
                     manager.updateCar(car);
@@ -96,5 +92,5 @@ public final class EditCarPage extends BasePage {
             return new Car();
         }
         return c;
-    }   
+    }
 }
