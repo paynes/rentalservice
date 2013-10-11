@@ -18,7 +18,6 @@ package cz.muni.rentalservice.web.pages;
 import cz.muni.rentalservice.db.managers.CustomerManager;
 import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.web.components.DateDropDown;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.markup.html.form.TextField;
@@ -73,10 +72,11 @@ public final class EditCustomerPage extends BasePage {
             public void onSubmit() {                
                 if (customer.getId() == null) {
                     manager.saveCustomer(customer);
-                    getSession().info("Customer added successfully");
+                    //TODO
+                    getSession().info(getString("customers.added"));
                 } else {
                     manager.updateCustomer(customer);
-                    getSession().info("Customer edited successfully");
+                    getSession().info(getString("customers.edited"));
                 }
                 setResponsePage(CustomersListPage.class);
             }

@@ -17,11 +17,11 @@ package cz.muni.rentalservice.web.pages;
 
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -71,10 +71,11 @@ public final class EditCarPage extends BasePage {
             protected void onSubmit(){
                 if (car.getId() == null) {
                     manager.saveCar(car);
-                    getSession().info("Car added successfully");
+                    //TODO
+                    getSession().info(getString("cars.added"));
                 } else {
                     manager.updateCar(car);
-                    getSession().info("Car edited successfully");
+                    getSession().info(getString("cars.edited"));
                 }
                 setResponsePage(CarsListPage.class);
             }

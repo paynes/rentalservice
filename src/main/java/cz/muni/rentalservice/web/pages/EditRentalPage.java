@@ -23,7 +23,6 @@ import cz.muni.rentalservice.models.Customer;
 import cz.muni.rentalservice.models.Rental;
 import cz.muni.rentalservice.web.components.DateDropDown;
 import cz.muni.rentalservice.web.validators.DatesRangeValidator;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -92,10 +91,11 @@ public final class EditRentalPage extends BasePage {
             public void onSubmit() {                
                 if (rental.getId() == null) {
                     rentalMngr.saveRental(rental);
-                    getSession().info("Rental added successfully.");
+                    //TODO
+                    getSession().info(getString("rentals.added"));
                 } else {
                     rentalMngr.updateRental(rental);
-                    getSession().info("Rental edited successfully.");
+                    getSession().info(getString("rentals.edited"));
                 }
                 setResponsePage(RentalsListPage.class);
             }

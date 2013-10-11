@@ -16,10 +16,10 @@
 package cz.muni.rentalservice.web.components;
 
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.FormComponentPanel;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.util.collections.MicroMap;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.joda.time.LocalDate;
 
@@ -76,7 +76,12 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
         try {
             setConvertedInput(new LocalDate(yearField.getConvertedInput(),monthField.getConvertedInput(), dayField.getConvertedInput()));
         } catch (IllegalArgumentException ex) {
-            this.warn("Zadany datum neexistuje.");
+            String value = getString("drop.error",Model.ofMap(
+                    new MicroMap("date",yearField.getConvertedInput() + "-" + 
+                                        monthField.getConvertedInput() + "-" + 
+                                        dayField.getConvertedInput())));
+
+            error(value);
         }
     }
 }
