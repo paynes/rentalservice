@@ -61,7 +61,6 @@ public final class EditRentalPage extends BasePage {
     }
     
     private void init(Rental rental) {
-        add(new Label("title", "Edit rental"));
         addForm(rental);
     }
 

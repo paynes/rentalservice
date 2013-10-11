@@ -42,7 +42,6 @@ public class CustomersListPage extends BasePage {
     }
     
     private void initComponents() {
-        add(new Label("title", new ResourceModel("customers.title")));
         addCustomersModule();
         
         add(new Link<BasePage>("EditCustomerPage") {
@@ -91,7 +90,7 @@ public class CustomersListPage extends BasePage {
         
         add(customers);
         
-        Label noCustomers = new Label("noCustomers","V databaze nie su ziadny uzivatelia");
+        Label noCustomers = new Label("noCustomers",new ResourceModel("empty"));
         noCustomers.setVisible(!customers.isVisible());
         add(noCustomers);
     }

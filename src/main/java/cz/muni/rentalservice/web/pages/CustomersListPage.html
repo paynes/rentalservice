@@ -5,7 +5,7 @@
         <wicket:extend>
             <div class="span8">
                 <div class="container">
-                    <h1><span wicket:id="title">Customers</span></h1>
+                    <h1><wicket:message key="customers.title"/></h1>
                     <wicket:enclosure child="feed">
                         <div wicket:id="feed"></div>
                     </wicket:enclosure>
@@ -17,9 +17,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Surname</th>
-                                <th>Born</th>
+                                <th><wicket:message key="customers.name"/></th>
+                                <th><wicket:message key="customers.surname"/></th>
+                                <th><wicket:message key="customers.born"/></th>
                             </tr>
                         </thead>
                         <span wicket:id="customers">

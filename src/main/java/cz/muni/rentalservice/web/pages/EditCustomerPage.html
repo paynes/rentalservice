@@ -3,9 +3,9 @@
 
     <body>
         <wicket:extend>
-            <div class="span10">
+            <div class="span1">
                 <div class="container">
-                    <h1><span wicket:id="title">Title</span></h1>
+                    <h1><wicket:message key="customers.edit"/></h1>
                 </div>
                 <div class="container">
                     <form action="" wicket:id="editCustomer">
@@ -22,7 +22,7 @@
                         <br/>
                         
                         <h2><label for="dropLabel" wicket:id="dropLabel">Choose date of birth</label></h2>
-                        <span wicket:id="born"></span>
+                        <div wicket:id="born"></div>
                         <br/>
                         
                         <button type="submit" class="btn btn-success" data-toggle="button">

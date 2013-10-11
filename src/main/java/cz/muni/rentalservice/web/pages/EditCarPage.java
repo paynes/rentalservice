@@ -46,7 +46,6 @@ public final class EditCarPage extends BasePage {
     }
     
     private void init(Car car) {
-        add(new Label("title","Edit car"));
         addForm(car);
     }
     

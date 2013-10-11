@@ -18,7 +18,6 @@ package cz.muni.rentalservice.web.pages;
 import cz.muni.rentalservice.db.managers.CarManager;
 import cz.muni.rentalservice.models.Car;
 import java.util.List;
-import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -45,7 +44,6 @@ public class CarsListPage extends BasePage{
     }
     
     public final void initComponents() {
-        add(new Label("title", new ResourceModel("cars.title")));
         add(new Link<BasePage>("EditCarPage") {
 
             @Override
@@ -92,7 +90,7 @@ public class CarsListPage extends BasePage{
         
         add(cars);
         
-        Label noCars = new Label("noCars","V databaze nie su ziadne auta.");
+        Label noCars = new Label("noCars",new ResourceModel("empty"));
         noCars.setVisible(!cars.isVisible());
         add(noCars);
     }

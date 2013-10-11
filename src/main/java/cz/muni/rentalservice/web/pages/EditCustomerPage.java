@@ -51,7 +51,6 @@ public final class EditCustomerPage extends BasePage {
     }
     
     private void init(Customer customer) {
-        add(new Label("title", "Edit Customer"));
         addForm(customer);
     }
 

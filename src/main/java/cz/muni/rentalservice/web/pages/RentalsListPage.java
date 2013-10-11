@@ -38,7 +38,6 @@ public class RentalsListPage extends BasePage {
     private RentalManager manager;
     
     public RentalsListPage() {
-        add(new Label("title", new ResourceModel("rentals.title")));
         addRentalsModule();
         
         add(new Link<BasePage>("EditRentalPage") {
@@ -82,18 +81,7 @@ public class RentalsListPage extends BasePage {
                     public void onClick() {
                         PageParameters parameters = new PageParameters();
                         parameters.add("id", rental.getId());
-                        parameters.add("customer",rental.getCustomer().getId());
-                        parameters.add("car",rental.getCar().getId());
-                        parameters.add("payement",rental.isPaid());
-                        parameters.add("expected",rental.getDays());
-                        parameters.add("dayFrom",rental.getDateFrom().getDayOfMonth());
-                        parameters.add("monthFrom",rental.getDateFrom().getMonthOfYear());
-                        parameters.add("yearFrom", rental.getDateFrom().getYear());
-                        parameters.add("dayTo",rental.getDateTo().getDayOfMonth());
-                        parameters.add("monthTo",rental.getDateTo().getMonthOfYear());
-                        parameters.add("yearTo", rental.getDateTo().getYear());
-                        EditRentalPage e = new EditRentalPage(parameters);
-                        setResponsePage(e);
+                        setResponsePage(new EditRentalPage(parameters));
                     }
                     
                 });
@@ -105,7 +93,7 @@ public class RentalsListPage extends BasePage {
         add(rentals);
         
         
-        Label noRentals = new Label("noRentals", "V databaze nie su ziadne zaznamy.");
+        Label noRentals = new Label("noRentals", new ResourceModel("empty"));
         noRentals.setVisible(!rentals.isVisible());
         add(noRentals);
     }
