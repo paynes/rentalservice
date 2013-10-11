@@ -65,33 +65,21 @@ public final class EditRentalPage extends BasePage {
     }
 
     private void addForm(final Rental rental) {
-        Label dateFromLabel = new Label("dateFromLabel", "Date from");
-        
         final DateDropDown dateFromField = new DateDropDown("dateFrom");
         dateFromField.setRequired(true);
         
-        Label dateToLabel = new Label("dateToLabel", "Date to");
-        
         final DateDropDown dateToField = new DateDropDown("dateTo");
         dateToField.setRequired(true);
-        
-        Label expectedDaysLabel = new Label("expectedDaysLabel", "Expected days");
         
         final TextField<Integer> expectedDaysField = new TextField<>("expectedDays");
         RangeValidator<Integer> validator = new RangeValidator<>(1,Integer.MAX_VALUE);
         expectedDaysField.add(validator);
         
-        Label payementLabel = new Label("payementLabel", "Paid");
-        
         final CheckBox box = new CheckBox("payement");
-        
-        Label carLabel = new Label("carLabel", "Car");
         
         ChoiceRenderer<Car> carRenderer = new ChoiceRenderer<>("model");
         final DropDownChoice<Car> carField = new DropDownChoice<>("car",carMngr.getCars(),carRenderer);
         carField.setRequired(true);
-        
-        Label customerLabel = new Label("customerLabel", "Customer");
         
         ChoiceRenderer<Customer> customerRenderer = new ChoiceRenderer<>("surname");
         final DropDownChoice<Customer> customerField = new DropDownChoice<>("customer", customerMngr.getCustomers(),customerRenderer);
@@ -115,17 +103,11 @@ public final class EditRentalPage extends BasePage {
         
         add(form);
         
-        form.add(dateFromLabel);
         form.add(dateFromField);
-        form.add(dateToLabel);
         form.add(dateToField);
-        form.add(expectedDaysLabel);
         form.add(expectedDaysField);
-        form.add(payementLabel);
         form.add(box);
-        form.add(carLabel);
         form.add(carField);
-        form.add(customerLabel);
         form.add(customerField);
         form.add(new DatesRangeValidator(dateFromField,dateToField));
         form.add(feed);

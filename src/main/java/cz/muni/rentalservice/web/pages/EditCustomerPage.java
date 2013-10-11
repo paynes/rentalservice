@@ -54,19 +54,13 @@ public final class EditCustomerPage extends BasePage {
         addForm(customer);
     }
 
-    private void addForm(final Customer customer) {
-        Label dropLabel = new Label("dropLabel","Choose date of birth");
-        
+    private void addForm(final Customer customer) {        
         final FormComponentPanel<LocalDate> bornField = new DateDropDown("born");
         bornField.setRequired(true);
-        
-        Label nameLabel = new Label("nameLabel","Customers name");
         
         final TextField<String> nameField = new TextField<>("name");
         nameField.setRequired(true);
         nameField.add(StringValidator.maximumLength(20));
-        
-        Label surnameLabel = new Label("surnameLabel","Customers surname");
         
         final TextField<String> surnameField = new TextField("surname");
         surnameField.setRequired(true);
@@ -90,11 +84,8 @@ public final class EditCustomerPage extends BasePage {
         
         add(form);
         
-        form.add(dropLabel);
         form.add(bornField);
-        form.add(nameLabel);
         form.add(nameField);
-        form.add(surnameLabel);
         form.add(surnameField);
         form.add(feed);
         

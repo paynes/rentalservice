@@ -13,15 +13,23 @@
                             <div wicket:id="feed"></div>
                         </wicket:enclosure>
                         
-                        <label for="name" wicket:id="nameLabel">Car model</label> 
+                        <label> 
+                            <wicket:message key="customers.name"/>
+                        </label> 
                         <input type="text" id="name" wicket:id="name"/>
                         <br/>
                     
-                        <label for="surname" wicket:id="surnameLabel">Car registration number</label>
+                        <label>
+                            <wicket:message key="customers.surname"/>
+                        </label>
                         <input type="text" id="name" wicket:id="surname"/>
                         <br/>
                         
-                        <h2><label for="dropLabel" wicket:id="dropLabel">Choose date of birth</label></h2>
+                        <h2>
+                            <label> 
+                                <wicket:message key="customers.drop"/>
+                            </label>
+                        </h2>
                         <div wicket:id="born"></div>
                         <br/>
                         

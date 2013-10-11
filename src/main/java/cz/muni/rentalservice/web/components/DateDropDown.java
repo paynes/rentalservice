@@ -39,13 +39,8 @@ public class DateDropDown extends FormComponentPanel<LocalDate> {
     public DateDropDown(String id) {
         super(id);
         
-        add(new Label("dayLabel","Day"));
         dayField = new TextField<>("day", new Model<Integer>(),Integer.class);
-        
-        add(new Label("monthLabel","Month"));
         monthField = new TextField<>("month",new Model<Integer>(),Integer.class);
-        
-        add(new Label("yearLabel","Year"));
         yearField = new TextField<>("year",new Model<Integer>(),Integer.class);
     }
      

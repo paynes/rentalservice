@@ -50,19 +50,15 @@ public final class EditCarPage extends BasePage {
     }
     
     private void addForm(final Car car) {
-        Label modelLabel = new Label("modelLabel","Model");
         
         final TextField<String> modelField = new TextField<>("model");
         modelField.setRequired(true);
         modelField.add(StringValidator.maximumLength(50));
         
-        Label regNumberLabel = new Label("regNumberLabel", "Registration Number");
         
         final TextField<String> regNumberField = new TextField<>("regNumber");
         regNumberField.setRequired(true);
         regNumberField.add(StringValidator.maximumLength(7));
-        
-        Label dailyFeeLabel = new Label("dailyFeeLabel","Daily fee");
         
         final TextField<Double> dailyFeeField = new TextField<>("dailyFee");
         dailyFeeField.setRequired(true);
@@ -87,11 +83,8 @@ public final class EditCarPage extends BasePage {
         
         add(form);
                 
-        form.add(modelLabel);
         form.add(modelField);
-        form.add(regNumberLabel);
-        form.add(regNumberField);        
-        form.add(dailyFeeLabel);
+        form.add(regNumberField);
         form.add(dailyFeeField);       
         form.add(feed);
     }
