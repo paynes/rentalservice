@@ -16,7 +16,9 @@
 package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.EditRentalPage;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -26,13 +28,24 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 public class TestEditRentalPage extends AbstractRentalServiceWebTest {
     
+    private WicketTester tester;
+    
+    @Before
+    public void setup() {
+        tester = getWicketTester();
+        tester.startPage(EditRentalPage.class);
+    }
+    
     @Test
     @DirtiesContext
     public void editRentalPageRendersSuccessfully() {
-        WicketTester tester = getWicketTester();
-        
-        tester.startPage(EditRentalPage.class);
-        
         tester.assertRenderedPage(EditRentalPage.class);
-    }    
+        tester.assertNoErrorMessage();
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testEditRantalPageComponents() {
+        tester.assertComponent("editRental", Form.class);
+    }
 }

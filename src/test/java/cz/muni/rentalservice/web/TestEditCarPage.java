@@ -16,8 +16,10 @@
 package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.EditCarPage;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -28,27 +30,35 @@ import org.springframework.test.annotation.DirtiesContext;
 
 public class TestEditCarPage extends AbstractRentalServiceWebTest {
     
+    private WicketTester tester;
+    
+    @Before
+    public void setup() {
+        tester = getWicketTester();
+        tester.startPage(EditCarPage.class);
+    }
+    
     
     @Test
     @DirtiesContext
-    public void editCarPageRendersSuccessfully() {
-        WicketTester tester = getWicketTester();
-        
-        tester.startPage(EditCarPage.class);
+    public void testEditCarPageRendersSuccessfully() {
         tester.assertRenderedPage(EditCarPage.class);
+        tester.assertNoErrorMessage();
     }
     
     @Test
     @DirtiesContext
-    public void editCarPageFormTest() {
-        WicketTester tester = getWicketTester();
+    public void testEditCarPageForm() {
         editCarPageForm(tester);
         tester.assertFeedback("feed", "Car added successfully");
     }
     
+    @Test
+    @DirtiesContext
+    public void testEditCarPageComponents() {
+        tester.assertComponent("editCar", Form.class);
+    }
     protected void editCarPageForm(WicketTester tester) {
-        tester.startPage(EditCarPage.class);
-        
         FormTester fTester = tester.newFormTester("editCar");
         fTester.setValue("model", "Renault");
         fTester.setValue("regNumber", "LM-157");

@@ -17,7 +17,9 @@ package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.EditRentalPage;
 import cz.muni.rentalservice.web.pages.RentalsListPage;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -27,23 +29,32 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 public class TestRentalsListPage extends AbstractRentalServiceWebTest {
     
+    private WicketTester tester;
+    
+    @Before
+    public void setup() {
+        tester = getWicketTester();
+        tester.startPage(RentalsListPage.class);
+    }
+    
     @Test
     @DirtiesContext
-    public void rentalsListPageRendersScuccessfully() {
-        WicketTester tester = getWicketTester();
-        
-        tester.startPage(RentalsListPage.class);
-        
+    public void testRentalsListPageRendersScuccessfully() {
         tester.assertRenderedPage(RentalsListPage.class);
+        tester.assertNoErrorMessage();
     }
     
     
     @Test
     @DirtiesContext
-    public void rentalsListPageLinkOnEditPage() {
-        WicketTester tester = getWicketTester();
-        tester.startPage(RentalsListPage.class);
+    public void testRentalsListPageLinkOnEditPage() {
         tester.clickLink("EditRentalPage");
         tester.assertRenderedPage(EditRentalPage.class);
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testRentalsListPageComponents() {
+        tester.assertComponent("feed", FeedbackPanel.class);
     }
 }

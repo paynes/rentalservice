@@ -17,7 +17,9 @@ package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.CarsListPage;
 import cz.muni.rentalservice.web.pages.EditCarPage;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -27,23 +29,30 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 public class TestCarsListPage extends AbstractRentalServiceWebTest{
     
+    private WicketTester tester;
+    
+    @Before
+    public void setup() {
+        tester = getWicketTester();
+        tester.startPage(CarsListPage.class);
+    }
     @Test
     @DirtiesContext
-    public void carsListPageRendersSuccessfully() {
-        WicketTester tester = getWicketTester();
-        
-        tester.startPage(CarsListPage.class);
-        
+    public void testCarsListPageRendersSuccessfully() {        
         tester.assertRenderedPage(CarsListPage.class);
-        
+        tester.assertNoErrorMessage();
     }
     
     @Test
     @DirtiesContext
-    public void carsListPageLinkOnEditPage() {
-        WicketTester tester = getWicketTester();
-        tester.startPage(CarsListPage.class);
+    public void testCarsListPageLinkOnEditPage() {
         tester.clickLink("EditCarPage");
         tester.assertRenderedPage(EditCarPage.class);
-    }    
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testCarsListPageComponents() {
+        tester.assertComponent("feed", FeedbackPanel.class);
+    }
 }

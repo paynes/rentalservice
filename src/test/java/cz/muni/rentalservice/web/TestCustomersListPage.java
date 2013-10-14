@@ -17,7 +17,9 @@ package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.CustomersListPage;
 import cz.muni.rentalservice.web.pages.EditCustomerPage;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -27,22 +29,31 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 public class TestCustomersListPage extends AbstractRentalServiceWebTest {
     
-    @Test
-    @DirtiesContext
-    public void customersListPageRendersSuccessfully() {
-        WicketTester tester = getWicketTester();
-        
+    private WicketTester tester;
+    
+    @Before
+    public void setup() {
+        tester = getWicketTester();
         tester.startPage(CustomersListPage.class);
-        
-        tester.assertRenderedPage(CustomersListPage.class);
     }
     
     @Test
     @DirtiesContext
-    public void customersListPageLinkOnEditPage() {
-        WicketTester tester = getWicketTester();
-        tester.startPage(CustomersListPage.class);        
+    public void testCustomersListPageRendersSuccessfully() {
+        tester.assertRenderedPage(CustomersListPage.class);
+        tester.assertNoErrorMessage();
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testCustomersListPageLinkOnEditPage() {
         tester.clickLink("EditCustomerPage");
         tester.assertRenderedPage(EditCustomerPage.class);
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testCustomersListPageComponents() {
+        tester.assertComponent("feed", FeedbackPanel.class);
     }
 }
