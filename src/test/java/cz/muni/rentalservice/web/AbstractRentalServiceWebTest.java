@@ -3,7 +3,6 @@ package cz.muni.rentalservice.web;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.mock.MockServletContext;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.After;
@@ -19,7 +18,7 @@ import cz.muni.rentalservice.test.AbstractRentalServiceTest;
 public abstract class AbstractRentalServiceWebTest extends AbstractRentalServiceTest {
     
     @Inject
-    WebApplication application;
+    RentalServiceApplication application;
     
     private WicketTester tester;
     
@@ -37,7 +36,7 @@ public abstract class AbstractRentalServiceWebTest extends AbstractRentalService
     }
     
     @After
-    public void tearDow() {
+    public void tearDown() {
         if (tester != null) {
             tester.destroy();
         }        
