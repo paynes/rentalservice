@@ -87,7 +87,13 @@ public final class EditCarPage extends BasePage {
     }
     
     private Car prepareCar(final PageParameters parameters) {
-        Car c = manager.getCar(parameters.get("id").toLong());
+        final Car c;
+        if (!parameters.isEmpty()) {
+            c = manager.getCar(parameters.get("id").toLong());
+        } else {
+            return new Car();
+        }
+        
         if (c == null) {
             return new Car();
         }

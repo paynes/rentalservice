@@ -113,11 +113,16 @@ public final class EditRentalPage extends BasePage {
     }
     
     private Rental prepareRental(final PageParameters parameters) {
-        Rental rental = rentalMngr.getRental(parameters.get("id").toLong());
-        if (rental == null) {
+        final Rental r;
+        if (!parameters.isEmpty()) {
+            r = rentalMngr.getRental(parameters.get("id").toLong());
+        } else {
             return new Rental();
         }
-        return rental;
+        if (r == null) {
+            return new Rental();
+        }
+        return r;
     }
     
 }

@@ -91,7 +91,13 @@ public final class EditCustomerPage extends BasePage {
     }
     
     private Customer prepareCustomer(final PageParameters parameters) {
-        Customer c = manager.getCustomer(parameters.get("id").toLong());
+        final Customer c;
+        if (!parameters.isEmpty()) {
+            c = manager.getCustomer(parameters.get("id").toLong());
+        } else {
+            return new Customer();
+        }
+        
         if (c == null) {
             return new Customer();
         }
