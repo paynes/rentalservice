@@ -42,14 +42,5 @@ public class TestDateDropDown extends AbstractRentalServiceWebTest {
         tester.assertComponent("test:day", TextField.class);
         tester.assertComponent("test:month", TextField.class);
         tester.assertComponent("test:year", TextField.class);
-    }
-    
-    @Test
-    @DirtiesContext
-    public void testDateDropDownRequiredComponents() {
-        tester.assertRequired("test:day");
-        tester.assertRequired("test:month");
-        tester.assertRequired("test:year");
-    }
-            
+    }            
 }
