@@ -51,15 +51,11 @@ public final class EditRentalPage extends BasePage {
     
     public EditRentalPage() {
         final Rental rental = new Rental();
-        init(rental);
+        addForm(rental);
     }
     
     public EditRentalPage(PageParameters parameters) {
         final Rental rental = prepareRental(parameters);
-        init(rental);
-    }
-    
-    private void init(Rental rental) {
         addForm(rental);
     }
 

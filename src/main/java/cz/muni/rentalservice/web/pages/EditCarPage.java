@@ -36,15 +36,11 @@ public final class EditCarPage extends BasePage {
     
     public EditCarPage() {
         final Car car = new Car();
-        init(car);
+        addForm(car);
     }
     
     public EditCarPage(final PageParameters parameters) {
         final Car car = prepareCar(parameters);
-        init(car);
-    }
-    
-    private void init(Car car) {
         addForm(car);
     }
     

@@ -41,15 +41,11 @@ public final class EditCustomerPage extends BasePage {
     
     public EditCustomerPage() {
         final Customer customer = new Customer();
-        init(customer);
+        addForm(customer);
     }
     
     public EditCustomerPage(final PageParameters parameters) {
         final Customer customer = prepareCustomer(parameters);
-        init(customer);
-    }
-    
-    private void init(Customer customer) {
         addForm(customer);
     }
 
