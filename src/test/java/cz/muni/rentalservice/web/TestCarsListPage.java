@@ -17,6 +17,7 @@ package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.CarsListPage;
 import cz.muni.rentalservice.web.pages.EditCarPage;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -36,6 +37,7 @@ public class TestCarsListPage extends AbstractRentalServiceWebTest{
         tester = getWicketTester();
         tester.startPage(CarsListPage.class);
     }
+    
     @Test
     @DirtiesContext
     public void testCarsListPageRendersSuccessfully() {        
@@ -54,5 +56,6 @@ public class TestCarsListPage extends AbstractRentalServiceWebTest{
     @DirtiesContext
     public void testCarsListPageComponents() {
         tester.assertComponent("feed", FeedbackPanel.class);
+        tester.assertComponent("cars", ListView.class);
     }
 }

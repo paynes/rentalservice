@@ -15,11 +15,14 @@
  */
 package cz.muni.rentalservice.web;
 
+import cz.muni.rentalservice.web.components.DateDropDown;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import cz.muni.rentalservice.web.pages.EditCustomerPage;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 
 /**
@@ -47,5 +50,28 @@ public class TestEditCustomerPage extends AbstractRentalServiceWebTest{
     @DirtiesContext
     public void testEditCustomerPageComponents() {
         tester.assertComponent("editCustomer", Form.class);
+        tester.assertComponent("editCustomer:name", TextField.class);
+        tester.assertComponent("editCustomer:surname", TextField.class);
+        tester.assertComponent("editCustomer:born", DateDropDown.class);
+        tester.assertComponent("editCustomer:born:day", TextField.class);
+        tester.assertComponent("editCustomer:born:month", TextField.class);
+        tester.assertComponent("editCustomer:born:year", TextField.class);
     }
+    
+    @Test
+    @DirtiesContext
+    public void testEditCustomerPageForm() {
+        editCustomerPageForm();
+        tester.assertFeedback("feed", "Customer added successfully");
+    }
+    
+    private void editCustomerPageForm() {
+        FormTester fTester = tester.newFormTester("editCustomer");
+        fTester.setValue("name", "Jan");
+        fTester.setValue("surname", "Novak");
+        fTester.setValue("born:day", "25");
+        fTester.setValue("born:month", "10");
+        fTester.setValue("born:year", "2000");
+        fTester.submit();
+ }
 }

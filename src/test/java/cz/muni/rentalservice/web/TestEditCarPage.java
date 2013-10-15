@@ -49,7 +49,7 @@ public class TestEditCarPage extends AbstractRentalServiceWebTest {
     @Test
     @DirtiesContext
     public void testEditCarPageForm() {
-        editCarPageForm(tester);
+        editCarPageForm();
         tester.assertFeedback("feed", "Car added successfully");
     }
     
@@ -58,7 +58,8 @@ public class TestEditCarPage extends AbstractRentalServiceWebTest {
     public void testEditCarPageComponents() {
         tester.assertComponent("editCar", Form.class);
     }
-    protected void editCarPageForm(WicketTester tester) {
+    
+    private void editCarPageForm() {
         FormTester fTester = tester.newFormTester("editCar");
         fTester.setValue("model", "Renault");
         fTester.setValue("regNumber", "LM-157");

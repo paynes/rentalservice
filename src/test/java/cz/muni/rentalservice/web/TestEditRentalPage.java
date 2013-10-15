@@ -15,8 +15,13 @@
  */
 package cz.muni.rentalservice.web;
 
+import cz.muni.rentalservice.web.components.DateDropDown;
 import cz.muni.rentalservice.web.pages.EditRentalPage;
+import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,5 +52,39 @@ public class TestEditRentalPage extends AbstractRentalServiceWebTest {
     @DirtiesContext
     public void testEditRantalPageComponents() {
         tester.assertComponent("editRental", Form.class);
+        tester.assertComponent("editRental:dateFrom", DateDropDown.class);
+        tester.assertComponent("editRental:dateFrom:day", TextField.class);
+        tester.assertComponent("editRental:dateFrom:month", TextField.class);
+        tester.assertComponent("editRental:dateFrom:year", TextField.class);
+        tester.assertComponent("editRental:dateTo", DateDropDown.class);
+        tester.assertComponent("editRental:dateFrom:day", TextField.class);
+        tester.assertComponent("editRental:dateFrom:month", TextField.class);
+        tester.assertComponent("editRental:dateFrom:year", TextField.class);
+        tester.assertComponent("editRental:expectedDays", TextField.class);
+        tester.assertComponent("editRental:payement", CheckBox.class);
+        tester.assertComponent("editRental:car", DropDownChoice.class);
+        tester.assertComponent("editRental:customer", DropDownChoice.class);
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testEditRentalPageForm() {
+        editRentalPageForm();
+        tester.assertFeedback("feed", "Rental added successfully.");
+    }
+    
+    private void editRentalPageForm() {
+        FormTester fTester = tester.newFormTester("editRental");
+        fTester.setValue("dateFrom:day", "25");
+        fTester.setValue("dateFrom:month", "10");
+        fTester.setValue("dateFrom:year", "2013");
+        fTester.setValue("dateTo:day", "27");
+        fTester.setValue("dateTo:month", "10");
+        fTester.setValue("dateTo:year", "2013");
+        fTester.setValue("payement", true);
+        fTester.setValue("expectedDays", "5");
+        fTester.select("car", 1);
+        fTester.select("customer", 1);
+        fTester.submit();
     }
 }

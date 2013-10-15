@@ -29,6 +29,7 @@ public abstract class AbstractRentalServiceWebTest extends AbstractRentalService
         final MockServletContext servletContext = new MockServletContext(application, pathUrl);
         servletContext.addInitParameter(ContextLoaderListener.CONFIG_LOCATION_PARAM, "/WEB-INF/applicationContext.xml");
         
+        
         final ContextLoaderListener cll = new TestContextListener();
         cll.initWebApplicationContext(servletContext);
         

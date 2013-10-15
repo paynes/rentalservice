@@ -17,6 +17,7 @@ package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.EditRentalPage;
 import cz.muni.rentalservice.web.pages.RentalsListPage;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -56,5 +57,6 @@ public class TestRentalsListPage extends AbstractRentalServiceWebTest {
     @DirtiesContext
     public void testRentalsListPageComponents() {
         tester.assertComponent("feed", FeedbackPanel.class);
+        tester.assertComponent("rentals", ListView.class);
     }
 }
