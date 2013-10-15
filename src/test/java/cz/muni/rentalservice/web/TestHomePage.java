@@ -26,7 +26,6 @@ public class TestHomePage extends AbstractRentalServiceWebTest {
     @Test
     @DirtiesContext
     public void basePageRendersSuccessfully() {
-        //assert rendered page class
         tester.assertRenderedPage(BasePage.class);
         tester.assertNoErrorMessage();
     }
