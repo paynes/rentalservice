@@ -17,6 +17,7 @@ package cz.muni.rentalservice.web;
 
 import cz.muni.rentalservice.web.pages.EditCarPage;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -48,15 +49,26 @@ public class TestEditCarPage extends AbstractRentalServiceWebTest {
     
     @Test
     @DirtiesContext
-    public void testEditCarPageForm() {
-        editCarPageForm();
-        tester.assertFeedback("feed", "Car added successfully");
+    public void testEditCarPageComponents() {
+        tester.assertComponent("editCar", Form.class);
+        tester.assertComponent("editCar:model", TextField.class);
+        tester.assertComponent("editCar:regNumber", TextField.class);
+        tester.assertComponent("editCar:dailyFee", TextField.class);
     }
     
     @Test
     @DirtiesContext
-    public void testEditCarPageComponents() {
-        tester.assertComponent("editCar", Form.class);
+    public void testEditCarPageRequiredComponents() {
+        tester.assertRequired("editCar:model");
+        tester.assertRequired("editCar:regNumber");
+        tester.assertRequired("editCar:dailyFee");
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testEditCarPageForm() {
+        editCarPageForm();
+        tester.assertFeedback("feed", "Car added successfully");
     }
     
     private void editCarPageForm() {

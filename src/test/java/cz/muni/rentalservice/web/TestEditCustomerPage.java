@@ -53,9 +53,14 @@ public class TestEditCustomerPage extends AbstractRentalServiceWebTest{
         tester.assertComponent("editCustomer:name", TextField.class);
         tester.assertComponent("editCustomer:surname", TextField.class);
         tester.assertComponent("editCustomer:born", DateDropDown.class);
-        tester.assertComponent("editCustomer:born:day", TextField.class);
-        tester.assertComponent("editCustomer:born:month", TextField.class);
-        tester.assertComponent("editCustomer:born:year", TextField.class);
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testEditCustomerPageRequiredComponents() {
+        tester.assertRequired("editCustomer:name");
+        tester.assertRequired("editCustomer:surname");
+        tester.assertRequired("editCustomer:born");
     }
     
     @Test

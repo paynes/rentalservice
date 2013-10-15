@@ -53,17 +53,20 @@ public class TestEditRentalPage extends AbstractRentalServiceWebTest {
     public void testEditRantalPageComponents() {
         tester.assertComponent("editRental", Form.class);
         tester.assertComponent("editRental:dateFrom", DateDropDown.class);
-        tester.assertComponent("editRental:dateFrom:day", TextField.class);
-        tester.assertComponent("editRental:dateFrom:month", TextField.class);
-        tester.assertComponent("editRental:dateFrom:year", TextField.class);
         tester.assertComponent("editRental:dateTo", DateDropDown.class);
-        tester.assertComponent("editRental:dateFrom:day", TextField.class);
-        tester.assertComponent("editRental:dateFrom:month", TextField.class);
-        tester.assertComponent("editRental:dateFrom:year", TextField.class);
         tester.assertComponent("editRental:expectedDays", TextField.class);
         tester.assertComponent("editRental:payement", CheckBox.class);
         tester.assertComponent("editRental:car", DropDownChoice.class);
         tester.assertComponent("editRental:customer", DropDownChoice.class);
+    }
+    
+    @Test
+    @DirtiesContext
+    public void testEditRentalPageRequiredComponents() {
+        tester.assertRequired("editRental:dateFrom");
+        tester.assertRequired("editRental:dateTo");
+        tester.assertRequired("editRental:car");
+        tester.assertRequired("editRental:customer");
     }
     
     @Test
